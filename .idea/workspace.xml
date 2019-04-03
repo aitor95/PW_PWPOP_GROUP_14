@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9caff1f6-d73c-456d-9117-2c4e61137858" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/Model/jlclasics.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/View/estiloDeVida.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/aitorClasics.php" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -16,10 +15,20 @@
     <executablePath>composer</executablePath>
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/composer.json">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="135">
+              <caret line="9" column="9" lean-forward="true" selection-start-line="9" selection-start-column="9" selection-end-line="9" selection-end-column="9" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/src" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
@@ -81,24 +90,6 @@
               <item name="PW_PWPOP_GROUP_14" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="PW_PWPOP_GROUP_14" type="b2602c69:ProjectViewProjectNode" />
-              <item name="PW_PWPOP_GROUP_14" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="Controller" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="PW_PWPOP_GROUP_14" type="b2602c69:ProjectViewProjectNode" />
-              <item name="PW_PWPOP_GROUP_14" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="Model" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="PW_PWPOP_GROUP_14" type="b2602c69:ProjectViewProjectNode" />
-              <item name="PW_PWPOP_GROUP_14" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="View" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
@@ -135,7 +126,7 @@
       <option name="presentableId" value="Default" />
       <updated>1554311462919</updated>
       <workItem from="1554311464070" duration="2573000" />
-      <workItem from="1554314130315" duration="1467000" />
+      <workItem from="1554314130315" duration="2554000" />
     </task>
     <task id="LOCAL-00001" summary="First">
       <created>1554313392126</created>
@@ -162,7 +153,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="4040000" />
+    <option name="totallyTimeSpent" value="5127000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1680" height="950" extended-state="0" />
@@ -237,13 +228,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/composer.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="16" column="32" lean-forward="true" selection-start-line="16" selection-start-column="32" selection-end-line="16" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Controller/aitorClasics.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="60">
@@ -256,6 +240,13 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/View/estiloDeVida.php">
       <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/composer.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="9" column="9" lean-forward="true" selection-start-line="9" selection-start-column="9" selection-end-line="9" selection-end-column="9" />
+        </state>
+      </provider>
     </entry>
   </component>
 </project>
