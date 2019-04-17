@@ -3,9 +3,26 @@
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
 
-$app->get('/hello/{name}', function (Request $request, Response $response, array $args) {
-    $name = $args['name'];
-    $response->getBody()->write("Hello, $name");
+$app->get('/login', function (Request $request, Response $response, array $args) {
+    return $this->view->render($response, 'login.twig', [
+       // 'name' => $args['name']
+    ]);
+});
 
-    return $response;
+$app->get('/registre', function (Request $request, Response $response, array $args) {
+    return $this->view->render($response, 'registre.twig', [
+       // 'name' => $args['name']
+    ]);
+});
+
+$app->get('/index', function (Request $request, Response $response, array $args) {
+    return $this->view->render($response, 'index.twig', [
+        // 'name' => $args['name']
+    ]);
+});
+
+$app->get('/search', function (Request $request, Response $response, array $args) {
+    return $this->view->render($response, 'search.twig', [
+        // 'name' => $args['name']
+    ]);
 });

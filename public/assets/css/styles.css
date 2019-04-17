@@ -1,0 +1,169 @@
+body {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Montserrat, sans-serif;
+
+}
+
+h1{
+    font-size: 2.5em;
+    font-weight: 500;
+}
+
+.wrapper{
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    height: 100vh;
+}
+
+.left-grid{
+    grid-column: 1/5;
+    align-items: center;
+    margin: 0 auto;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.left-grid h1{
+    color: #3AB19B;
+    padding: 1em;
+    margin-top: 2em;
+    margin-bottom: 0;
+}
+.logo svg{
+    vertical-align: middle;
+    margin-right: 10px;
+}
+.logo svg path{
+    fill: #3AB19B;
+}
+
+.logo{
+    position: absolute;
+    left: 20px;
+    top: 20px;
+}
+.logo img{
+    vertical-align: middle;
+
+}
+.left a{
+    margin-top: 0;
+    padding-bottom: 0.5em;
+    color: black;
+    border-bottom: 1px solid #eee;
+}
+.waves-effect.waves-light.btn-large{
+    border-radius: 30px;
+    box-shadow: none;
+    color: white;
+    margin-top: 20px;
+    box-shadow: 0 12px 24px rgba(34,51,49,.13);
+}
+.right-grid {
+    grid-column: 5/8;
+    display: flex;
+    align-items: center;
+    background: #3AB19B url("/assets/img/bg.png");
+    background-size: cover;
+    background-position: center;
+    width: 100%;
+    flex-direction: column;
+}
+.right-grid h1{
+    color: white;
+    padding: 1em 1em 0 1em;
+    margin-top: 5em;
+    text-align: center
+}
+
+.right-grid p{
+    width: 70%;
+    color: white;
+    font-weight: 300;
+    text-align: center;
+    font-size: 1.5em;
+}
+
+.waves-effect.waves-light.btn-large.secondary{
+    color: black;
+    background-color: inherit;
+}
+.waves-effect.waves-light.btn-large:hover{
+    box-shadow: none;
+}
+.row{
+    padding: 0 2em;
+    margin: 0;
+}
+
+
+.cross{
+    position: absolute;
+    right: 20px;
+    top: 20px;
+}
+
+.cross svg path{
+    fill: white;
+}
+.cross:hover{
+    cursor: pointer;
+}
+a {
+    list-style: none;
+    text-decoration: none;
+}
+.hack{
+    margin-top: 1em !important;
+}
+
+.brand-logo.personal{
+    line-height: 64px;
+}
+
+.container-margin{
+    margin-top: 1em;
+}
+.nav-wrapper .brand-logo{
+    font-weight: 300;
+    font-size: 1.2em;
+    vertical-align: middle;
+}
+
+.price-content{
+    position: relative;
+    margin-top: 20px;
+}
+
+.price-content span{
+    font-weight: 700;
+    font-size: 1em;
+    position: absolute;
+    top: 3px;
+}
+
+.price-content .price{
+    margin-left: 10px !important;
+    font-size: 1.5em;
+    font-weight: 300;
+}
+.section-search input{
+    /* padding: 5px !important; */
+    font-size: 18px !important;
+    width: 90% !important;
+    border: #f4f4f4 3px solid !important;
+    margin-right: 0;
+}
+
+.btn-search{
+    height: 50px !important;
+    width: 120px !important;
+    margin-left: -30px !important;
+    margin-top: 14px !important;
+}
+.tiny{
+    font-size: 1.3em !important;
+}
