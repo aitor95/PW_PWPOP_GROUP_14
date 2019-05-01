@@ -1,13 +1,12 @@
 <?php
 
-require_once __DIR__ . '/../vendor/autoload.php';
+    //Twig&Slim Configuration
 
-$settings = require_once __DIR__ . '/../config/settings.php';
+    require_once __DIR__ . '/../vendor/autoload.php';
+    $settings = require_once __DIR__ . '/../config/settings.php';
+    $app = new \Slim\App($settings);
+    $dependencies = require_once __DIR__ . '/../config/dependencies.php';
+    require_once __DIR__ . '/../config/routes.php';
 
-$app = new \Slim\App($settings);
+    $app->run();
 
-require_once __DIR__ . '/../config/routes.php';
-
-require_once __DIR__ . '/../config/dependencies.php';
-
-$app->run();

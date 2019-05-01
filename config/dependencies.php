@@ -21,3 +21,10 @@ $container['view'] = function ($c) {
 
     return $view;
 };
+
+$container['model'] = new \PwPop\Model\Services\DBConnection( new \PwPop\Model\UsersRegistered());
+
+$container['controller'] = new \PwPop\Controller\LoginController($container['model']);
+
+return $container;
+
