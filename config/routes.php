@@ -27,11 +27,6 @@ $app->get('/search', function (Request $request, Response $response, array $args
     return $this->view->render($response, 'search.twig', [
         // 'name' => $args['name']
     ]);
-<<<<<<< HEAD
 });
 
 $app->post('/users', UserController::class . ':registerAction');
-
-=======
-});
->>>>>>> parent of 89d7904... Intento de Implementación de Login i Registre

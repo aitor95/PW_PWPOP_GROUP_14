@@ -1,11 +1,7 @@
 <?php
 
-use Slim\Flash\Messages;
-use Slim\Http\Environment;
-use Slim\Http\Uri;
-use Slim\Views\Twig;
-use Slim\Views\TwigExtension;
-use SallePW\SlimApp\Model\Database\Database;
+use PwPop\Model\Database\PDORepository;
+use PwPop\Model\Database\Database;
 use Slim\Container;
 
 
@@ -24,13 +20,8 @@ $container['view'] = function ($c) {
 
     return $view;
 };
-<<<<<<< HEAD
 
-$container['controller'] = new \PwPop\Controller\UserController($container['model']);
-
-$container['flash'] = function () {
-    return new Messages();
-};
+//$container['controller'] = new \PwPop\Controller\UserController($container['model']);
 
 $container['db'] = function (Container $c) {
     return Database::getInstance(
@@ -45,7 +36,4 @@ $container['user_repo'] = function (Container $c) {
     return new PDORepository($c->get('db'));
 };
 
-
 return $container;
-=======
->>>>>>> parent of 89d7904... Intento de Implementación de Login i Registre
