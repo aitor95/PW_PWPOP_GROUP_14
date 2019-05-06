@@ -24,6 +24,7 @@ $container['view'] = function ($c) {
 
     return $view;
 };
+<<<<<<< HEAD
 
 $container['controller'] = new \PwPop\Controller\UserController($container['model']);
 
@@ -46,3 +47,5 @@ $container['user_repo'] = function (Container $c) {
 
 
 return $container;
+=======
+>>>>>>> parent of 89d7904... Intento de Implementación de Login i Registre
