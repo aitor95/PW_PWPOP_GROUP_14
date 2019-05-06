@@ -2,6 +2,8 @@
 
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
+use PwPop\Controller\UserController;
+
 
 
 $app->get('/login', function (Request $request, Response $response, array $args) {
@@ -27,3 +29,6 @@ $app->get('/search', function (Request $request, Response $response, array $args
         // 'name' => $args['name']
     ]);
 });
+
+$app->post('/users', UserController::class . ':registerAction');
+

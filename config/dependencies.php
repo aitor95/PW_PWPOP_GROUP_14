@@ -1,10 +1,13 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: AitorBlesa
- * Date: 15/04/2019
- * Time: 21:54
- */
+
+use Slim\Flash\Messages;
+use Slim\Http\Environment;
+use Slim\Http\Uri;
+use Slim\Views\Twig;
+use Slim\Views\TwigExtension;
+use SallePW\SlimApp\Model\Database\Database;
+use Slim\Container;
+
 
 $container = $app->getContainer();
 
@@ -22,9 +25,24 @@ $container['view'] = function ($c) {
     return $view;
 };
 
-$container['model'] = new \PwPop\Model\Services\DBConnection( new \PwPop\Model\UsersRegistered());
+$container['controller'] = new \PwPop\Controller\UserController($container['model']);
 
-$container['controller'] = new \PwPop\Controller\LoginController($container['model']);
+$container['flash'] = function () {
+    return new Messages();
+};
+
+$container['db'] = function (Container $c) {
+    return Database::getInstance(
+        $c['settings']['db']['username'],
+        $c['settings']['db']['password'],
+        $c['settings']['db']['host'],
+        $c['settings']['db']['dbName']
+    );
+};
+
+$container['user_repo'] = function (Container $c) {
+    return new PDORepository($c->get('db'));
+};
+
 
 return $container;
-
