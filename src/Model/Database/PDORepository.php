@@ -22,18 +22,18 @@ final class PDORepository implements UserRepositoryInterface{
 
     public function save(User $user) {
 
-        //$statement = $this->database->connection->prepare("INSERT INTO user(email, password, created_at, updated_at) values(:email, :password, :created_at, :updated_at)");
+        $statement = $this->database->connection->prepare("INSERT INTO user(email, password, created_at, updated_at) values(:email, :password, :created_at, :updated_at)");
 
         $email = $user->getEmail();
         $password = $user->getPassword();
         $createdAt = $user->getCreatedAt()->format('Y-m-d H:i:s');
         $updatedAt = $user->getUpdatedAt()->format('Y-m-d H:i:s');
 
-        //$statement->bindParam('email', $email, PDO::PARAM_STR);
-        //$statement->bindParam('password', $password, PDO::PARAM_STR);
-        //$statement->bindParam('created_at', $createdAt, PDO::PARAM_STR);
-        //$statement->bindParam('updated_at', $updatedAt, PDO::PARAM_STR);
+        $statement->bindParam('email', $email, PDO::PARAM_STR);
+        $statement->bindParam('password', $password, PDO::PARAM_STR);
+        $statement->bindParam('created_at', $createdAt, PDO::PARAM_STR);
+        $statement->bindParam('updated_at', $updatedAt, PDO::PARAM_STR);
 
-        //$statement->execute();
+        $statement->execute();
     }
 }

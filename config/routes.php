@@ -29,4 +29,4 @@ $app->get('/search', function (Request $request, Response $response, array $args
     ]);
 });
 
-$app->post('/users', UserController::class . ':registerAction');
+$app->post('/users',UserController::class . ':registerAction');

@@ -9,8 +9,9 @@ use Psr\Container\ContainerInterface;
 use PwPop\Model\Database\PDORepository;
 use PwPop\Model\User;
 
-final class UserController
-{
+
+final class UserController{
+
     /** @var ContainerInterface */
     private $container;
 
@@ -26,6 +27,7 @@ final class UserController
     public function registerAction(Request $request, Response $response): Response
     {
         try {
+
             $data = $request->getParsedBody();
 
             /** @var PDORepository $repository */
@@ -40,6 +42,10 @@ final class UserController
             );
 
             $repository->save($user);
+
+            header("Location: /index");
+            exit;
+
         } catch (\Exception $e) {
             $response->getBody()->write('Unexpected error: ' . $e->getMessage());
             return $response->withStatus(500);

@@ -21,8 +21,6 @@ $container['view'] = function ($c) {
     return $view;
 };
 
-//$container['controller'] = new \PwPop\Controller\UserController($container['model']);
-
 $container['db'] = function (Container $c) {
     return Database::getInstance(
         $c['settings']['db']['username'],
