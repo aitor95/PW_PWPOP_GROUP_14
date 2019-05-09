@@ -37,19 +37,64 @@ final class UserController{
             $user = new User(
                 $data['email'],
                 $data['password'],
+                $data['birthDate'],
+                $data['name'],
+                $data['username'],
+                $data['phone'],
                 new DateTime(),
                 new DateTime()
             );
 
             $repository->save($user);
+            //Guardamos la imagen también
+            $response = (new FileController)->uploadAction($request,$response);
 
-            header("Location: /index");
-            exit;
+            //FALTA IMPLEMENTAR (Como poner mensaje de succsess en el login?)----------------
+            //header("Location: /login");
+           //exit;
+            //----------------------------------------------------------------------------
 
         } catch (\Exception $e) {
             $response->getBody()->write('Unexpected error: ' . $e->getMessage());
             return $response->withStatus(500);
         }
+
         return $response->withStatus(201);
+    }
+
+    public function loginAction(Request $request, Response $response): Response
+    {
+        try{
+
+
+        //Preguntar a la database si hay algun usuario que concorda
+        $data = $request->getParsedBody();
+
+        /** @var PDORepository $repository */
+        $repository = $this->container->get('user_repo');
+
+        if($repository->login($data['email'], $data['password'])){
+
+            //Login
+            header("Location: /index");
+            exit;
+
+        }else{
+
+            //Try Again (No se porque no muestra el alert (por el exit, pero es necesario para cambiar de pagina))
+            $alert = "Not Registered, Try Again";
+            echo "<script type='text/javascript'>alert('$alert');</script>";
+            header("Location: /login");
+            exit;
+
+        }
+
+        } catch (\Exception $e) {
+            $response->getBody()->write('Unexpected error: ' . $e->getMessage());
+            return $response->withStatus(500);
+        }
+
+        return $response->withStatus(201);
+
     }
 }

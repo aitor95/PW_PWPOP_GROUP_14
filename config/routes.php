@@ -29,4 +29,8 @@ $app->get('/search', function (Request $request, Response $response, array $args
     ]);
 });
 
-$app->post('/users',UserController::class . ':registerAction');
+$app->post('/registration',UserController::class . ':registerAction')
+    ->setName('upload');
+
+$app->post('/user',UserController::class . ':loginAction');
+
