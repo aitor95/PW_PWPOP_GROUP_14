@@ -47,11 +47,11 @@ final class UserController{
 
             $repository->save($user);
             //Guardamos la imagen también
-            $response = (new FileController)->uploadAction($request,$response);
+            //$response = (new FileController)->uploadAction($request,$response);
 
             //FALTA IMPLEMENTAR (Como poner mensaje de succsess en el login?)----------------
             //header("Location: /login");
-           //exit;
+            //exit;
             //----------------------------------------------------------------------------
 
         } catch (\Exception $e) {
