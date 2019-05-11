@@ -17,7 +17,7 @@ $app->get('/registre', function (Request $request, Response $response, array $ar
     ]);
 });
 
-$app->get('/index', function (Request $request, Response $response, array $args) {
+$app->get('/', function (Request $request, Response $response, array $args) {
     return $this->view->render($response, 'index.twig', [
         // 'name' => $args['name']
     ]);
@@ -25,6 +25,12 @@ $app->get('/index', function (Request $request, Response $response, array $args)
 
 $app->get('/search', function (Request $request, Response $response, array $args) {
     return $this->view->render($response, 'search.twig', [
+        // 'name' => $args['name']
+    ]);
+});
+
+$app->get('/profile', function (Request $request, Response $response, array $args) {
+    return $this->view->render($response, 'profile.twig', [
         // 'name' => $args['name']
     ]);
 });

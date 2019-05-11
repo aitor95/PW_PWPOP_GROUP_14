@@ -1,25 +1,11 @@
 {
-    "name": "jl/pw_pwpop_group_14",
+    "name": "aitorblesa/pw_pwpop_group_14",
     "type": "project",
     "authors": [
         {
-            "name": "Joan Lluis Mudarra",
-            "email": "joanlluismudarra@gmail.com"
-        },
-
-        {
             "name": "Aitor Blesa",
-            "email": "aitor.blesa@students.salle.url.edu"
+            "email": "aitor.blesa.2016@salleurl.edu"
         }
     ],
-    "require": {
-        "slim/slim": "^3.12",
-        "slim/twig-view": "^2.5"
-    },
-
-    "autoload": {
-        "psr-4": {
-            "PwPop\\": "src/"
-        }
-    }
+    "require": {}
 }
