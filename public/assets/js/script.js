@@ -27,3 +27,88 @@ M.Autocomplete.init(Autocomplete, {
         "Product7":null,
     }
 });
+
+
+function validaFormulario(event){
+    var devolver = false;
+
+    //event.preventDefault();
+    var name = document.getElementById("name").value;
+    var message_name = document.getElementById("message-name");
+    if (!/^[a-z0-9]+$/i.test(name)){
+        message_name.innerHTML ="The name can only consist of alphanumeric characters";
+        message_name.classList.add("error");
+        devolver = false;
+    } else {
+        message_name.innerHTML = "";
+        message_name.classList.remove("error");
+        devolver = true;
+    }
+
+    var username = document.getElementById("username").value;
+    var message_username = document.getElementById("message-username");
+    if (!/^[a-z0-9]+$/i.test(username) || username.length > 20){
+        message_username.innerHTML = "he name can only consist of alphanumeric and 20 characters max";
+        message_username.classList.add("error");
+        devolver = false;
+    }  else {
+        message_username.innerHTML = "";
+        devolver = true;
+    }
+
+    var email = document.getElementById("email").value;
+    var message_email = document.getElementById("message-email");
+    if (!/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email) || email.length > 20){
+        message_email.innerHTML = "Please enter a valid email address.";
+        message_email.classList.add("error");
+        devolver = false;
+    } else {
+        message_email.classList.remove("error");
+        devolver = true;
+    }
+
+    var phone = document.getElementById("phone").value;
+    var message_phone = document.getElementById("message-phone");
+    if (phone.length > 9){
+        message_phone.innerHTML = "Format: xxx xxx xxx";
+        message_phone.classList.add("error");
+        devolver = false;
+    } else {
+        message_phone.classList.remove("error");
+        devolver = true;
+    }
+
+    var password = document.getElementById("password").value;
+    var message_password = document.getElementById("message-password");
+    if (password.length <6){
+        message_password.innerHTML = "Minimum 6 characters";
+        message_password.classList.add("error");
+        devolver = false;
+    } else {
+        message_password.innerHTML = "";
+        devolver = true;
+    }
+
+    var confirmpassword = document.getElementById("confirm-password").value;
+    var message_confirm = document.getElementById("message-confirm-password");
+    if (confirmpassword.length < 6 ) {
+        message_confirm.innerText = "Minimum 6 characters";
+        message_confirm.classList.add("error");
+    } else {
+        if (confirmpassword !== password){
+            message_confirm.innerHTML = "Passwords must match";
+            message_confirm.classList.add("error");
+            devolver = false;
+        } else {
+            message_confirm.innerHTML = "";
+            devolver = true;
+        }
+    }
+
+    if (!devolver){
+        event.preventDefault();
+    }
+
+}
+
+document.getElementById("formulario").addEventListener('submit', validaFormulario);

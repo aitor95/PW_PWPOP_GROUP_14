@@ -28,6 +28,7 @@ final class PDORepository implements UserRepositoryInterface{
 
         $email = $user->getEmail();
         $password = $user->getPassword();
+        $passcrypted = md5($password);
         $birth_date = $user->getBirthDate();
         $name = $user->getName();
         $username = $user->getUsername();
@@ -36,7 +37,7 @@ final class PDORepository implements UserRepositoryInterface{
         $updatedAt = $user->getUpdatedAt()->format('Y-m-d H:i:s');
 
         $statement->bindParam('email', $email, PDO::PARAM_STR);
-        $statement->bindParam('password', $password, PDO::PARAM_STR);
+        $statement->bindParam('password', $passcrypted, PDO::PARAM_STR);
         $statement->bindParam('birth_date', $birth_date, PDO::PARAM_STR);
         $statement->bindParam('name', $name, PDO::PARAM_STR);
         $statement->bindParam('username', $username, PDO::PARAM_STR);
@@ -53,10 +54,10 @@ final class PDORepository implements UserRepositoryInterface{
         $info = $this->database->connection->query('SELECT * FROM user');
         $data = $info->fetchAll();
 
-
         $registered = false;
+        $passwordcrypted = md5($password);
         for ($i=0; $i < sizeof($data) ; $i++) {
-            if($email == $data[$i]['email'] && $password == $data[$i]['password']){
+            if($email == $data[$i]['email'] && $passwordcrypted == $data[$i]['password']){
                 $registered = true;
             }
         }

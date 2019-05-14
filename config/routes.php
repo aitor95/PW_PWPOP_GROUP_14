@@ -17,7 +17,7 @@ $app->get('/registre', function (Request $request, Response $response, array $ar
     ]);
 });
 
-$app->get('/index', function (Request $request, Response $response, array $args) {
+$app->get('/', function (Request $request, Response $response, array $args) {
     return $this->view->render($response, 'index.twig', [
         // 'name' => $args['name']
     ]);
@@ -29,6 +29,17 @@ $app->get('/search', function (Request $request, Response $response, array $args
     ]);
 });
 
+$app->get('/profile', function (Request $request, Response $response, array $args) {
+    return $this->view->render($response, 'profile.twig', [
+        // 'name' => $args['name']
+    ]);
+});
+
+$app->get('/403', function (Request $request, Response $response, array $args) {
+    return $this->view->render($response, '403.twig', [
+        // 'name' => $args['name']
+    ]);
+});
 $app->post('/registration',UserController::class . ':registerAction');
 
 $app->post('/user',UserController::class . ':loginAction');
