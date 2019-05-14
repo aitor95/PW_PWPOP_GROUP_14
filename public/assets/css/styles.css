@@ -195,14 +195,7 @@ hr{
 .email{
     position: relative;
 }
-.profile_info span{
-    position: absolute;
-    font-size: 4em;
-    top: 63%;
-    left: 3%;
-    color: rgba(250,250,250,.5);
-    z-index: -1;
-}
+
 .right-grid h1{
     color: white;
     padding: 1em 1em 0 1em;

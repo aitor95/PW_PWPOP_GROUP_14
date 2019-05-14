@@ -49,7 +49,8 @@ final class UserController{
             //Guardamos la imagen también
             //$response = (new FileController)->uploadAction($request,$response);
 
-            //FALTA IMPLEMENTAR (Como poner mensaje de succsess en el login?)----------------
+            //TODO: Implementar mensaje flash de registrat correctament
+
             header("Location: /login");
             exit;
             //PENE
@@ -98,4 +99,5 @@ final class UserController{
         return $response->withStatus(201);
 
     }
+
 }
