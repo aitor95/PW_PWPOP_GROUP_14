@@ -143,7 +143,7 @@ h1{
 }
 .image_user > img{
     border-radius: 0 0 30% 0;
-    margin: 20% 0 0 80%;
+    margin: 16% 0 0 80%;
     background-size: cover;
     width: 100%;
     overflow: hidden;
@@ -154,9 +154,9 @@ h1{
     display: flex;
     flex-direction: column;
     //border: 1px solid red;
-    width: 500px;
+    width: 50%;
     height: 50vh;
-    top: 20%;
+    top: 19%;
     left: 45%;
 }
 
@@ -175,7 +175,7 @@ hr{
 }
 
 .name{
-    margin: 20px 20px 0 0px;
+    margin: -20px 20px 0 0px;
     position: relative;
     padding: 10px;
     background-color: #3AB19B;
@@ -296,4 +296,7 @@ a {
 }
 .tiny{
     font-size: 1.3em !important;
+}
+.waves-effect.waves-light.btn-large.hack{
+    margin-top: -20px !important;
 }

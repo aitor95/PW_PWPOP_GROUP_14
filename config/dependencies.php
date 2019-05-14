@@ -1,5 +1,6 @@
 <?php
 
+use Slim\Flash\Messages;
 use PwPop\Model\Database\PDORepository;
 use PwPop\Model\Database\Database;
 use Slim\Container;
@@ -32,6 +33,10 @@ $container['db'] = function (Container $c) {
 
 $container['user_repo'] = function (Container $c) {
     return new PDORepository($c->get('db'));
+};
+
+$container['flash'] = function () {
+    return new Messages();
 };
 
 return $container;
