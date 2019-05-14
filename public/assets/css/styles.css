@@ -10,22 +10,14 @@ h1{
     font-size: 2.5em;
     font-weight: 500;
 }
-.vol.s12{
-    text-align: center;
-}
+
 .wrapper{
     display: grid;
     grid-template-columns: repeat(6, 1fr);
     height: 100vh;
 }
 
-.wrapper-profile{
-    display: grid;
-    grid-template-columns: repeat(6, 1fr);
-    height: 80.6vh;
-}
-
-.login-grid{
+.left-grid{
     grid-column: 1/5;
     align-items: center;
     margin: 0 auto;
@@ -34,7 +26,7 @@ h1{
     flex-direction: column;
 }
 
-.login-grid h1{
+.left-grid h1{
     color: #3AB19B;
     padding: 1em;
     margin-top: 2em;
@@ -79,79 +71,6 @@ h1{
     background-position: center;
     width: 100%;
     flex-direction: column;
-}
-
-.left-grid {
-    grid-column: 1/3 !important;
-    display: flex;
-    align-items: center;
-    background: #3AB19B url("/assets/img/bg.png");
-    background-size: cover;
-    background-position: center;
-    width: 100%;
-    flex-direction: column;
-    height: 80.6vh;
-
-}
-
-.image_user{
-    border-radius: 0 0 30% 0;
-    margin: 20% 0 0 90%;
-}
-
-.profile_info{
-    position: absolute;
-    display: flex;
-    flex-direction: column;
-    //border: 1px solid red;
-    width: 500px;
-    height: 50vh;
-    top: 20%;
-    left: 45%;
-}
-
-hr{
-    border: 0;
-    height: 1px;
-    width: 230px;
-    background-color: #eeeeee;
-    position: absolute;
-    top: 30%;
-    left: -13%;
-    z-index: -1;
-}
-.profile_info p{
-    margin-left: 20px;
-}
-
-.name{
-    margin: 20px 20px 0 0px;
-    position: relative;
-    padding: 10px;
-    background-color: #3AB19B;
-    color: #fff;
-    text-transform: uppercase;
-    width: auto;
-    font-size: 1.5em;
-}
-
-.nickname{
-    color: #000000;
-    font-size: 1.2em;
-}
-.birthdate{
-    display: inline;
-}
-.email{
-    position: relative;
-}
-.profile_info span{
-    position: absolute;
-    font-size: 4em;
-    top: 63%;
-    left: 3%;
-    color: rgba(250,250,250,.5);
-    z-index: -1;
 }
 .right-grid h1{
     color: white;

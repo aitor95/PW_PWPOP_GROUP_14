@@ -50,8 +50,9 @@ final class UserController{
             //$response = (new FileController)->uploadAction($request,$response);
 
             //FALTA IMPLEMENTAR (Como poner mensaje de succsess en el login?)----------------
-            //header("Location: /login");
-            //exit;
+            header("Location: /login");
+            exit;
+            //PENE
             //----------------------------------------------------------------------------
 
         } catch (\Exception $e) {
