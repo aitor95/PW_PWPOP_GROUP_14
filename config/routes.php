@@ -3,6 +3,7 @@
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
 use PwPop\Controller\UserController;
+use PwPop\Controller\Middleware\SessionMiddleware;
 
 
 $app->get('/login', function (Request $request, Response $response, array $args) {
@@ -14,35 +15,44 @@ $app->get('/login', function (Request $request, Response $response, array $args)
 $app->get('/registre', function (Request $request, Response $response, array $args) {
 
     return $this->view->render($response, 'registre.twig', [
-       // 'name' => $args['name']
+        'logged' => $_SESSION['logged'],
     ]);
 });
 
 $app->get('/', function (Request $request, Response $response, array $args) {
     return $this->view->render($response, 'index.twig', [
-        // 'name' => $args['name']
+        'logged' => $_SESSION['logged'],
     ]);
 });
 
 $app->get('/search', function (Request $request, Response $response, array $args) {
     return $this->view->render($response, 'search.twig', [
-        // 'name' => $args['name']
+        'logged' => $_SESSION['logged'],
     ]);
 });
 
 $app->get('/profile', function (Request $request, Response $response, array $args) {
     return $this->view->render($response, 'profile.twig', [
-        // 'name' => $args['name']
+        'logged' => $_SESSION['logged'],
     ]);
 });
 
 $app->get('/403', function (Request $request, Response $response, array $args) {
     return $this->view->render($response, '403.twig', [
-        // 'name' => $args['name']
+        'logged' => $_SESSION['logged'],
     ]);
 });
+
+$app->get('/logout', UserController::class.':logOut');
 
 $app->post('/registration',UserController::class . ':registerAction');
 
 $app->post('/user',UserController::class . ':loginAction');
+
+$app->add(SessionMiddleware::class);
+
+$_SESSION['logged'] = false;
+
+
+
 

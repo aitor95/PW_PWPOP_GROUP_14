@@ -54,29 +54,37 @@ final class UserController{
 
                 //Si es correcta guardamos al usario en la database
                 $repository->save($user,$name);
-                header("Location: /login");
-                exit;
+                //header("refresh: 3");
+                return $this->container->get('view')->render($response, 'login.twig', [
+                    'success' => 'Registrat correctament!',
+                    'logged' => $_SESSION['logged'],
+                ]);
 
             } else {
 
+                $errorUsername = "";
+                $errorImg = "";
+                $errorEmail = "";
+
                 if ($name == '') {
                     //DISPLAY ERROR IMG
-
-                    header("Location: /registre");
-                    exit;
+                    $errorImg = "Wrong Image Format, Accepted: jpg, png, jpeg";
                 }
                 if ($registered >= 3) {
                     //DISPLAY ERROR EN EMAIL
-
-                    header("Location: /registre");
-                    exit;
+                    $errorEmail = "Email Already in use";
                 }
                 if ($registered == 4 || $registered == 1) {
                     //DISPLAY ERROR EN USERNAME
-
-                    header("Location: /registre");
-                    exit;
+                    $errorUsername = "Username Already in use";
                 }
+
+                return $this->container->get('view')->render($response, 'registre.twig', [
+                    'errorEmail' => $errorEmail,
+                    'errorUsername' => $errorUsername,
+                    'errorImg' => $errorImg,
+                    'logged' => $_SESSION['logged'],
+                ]);
 
             }
 
@@ -104,14 +112,20 @@ final class UserController{
         if($repository->login($data['email'], $data['password'])){
 
             //Login
-            header("Location: /");
-            exit;
+            $_SESSION['logged'] = true;
+
+            return $this->container->get('view')->render($response, 'index.twig', [
+                'success' => 'Login Success!',
+                'logged' => $_SESSION['logged'],
+            ]);
 
         }else{
 
             //No acierta usuario o contraseña
-            header("Location: /login");
-            exit;
+            return $this->container->get('view')->render($response, 'login.twig', [
+                'error' => 'Username or Email invalid!',
+                'logged' => $_SESSION['logged'],
+            ]);
 
         }
 
@@ -121,6 +135,19 @@ final class UserController{
         }
 
         return $response->withStatus(201);
+
+    }
+
+    public function logOut (Request $request, Response $response): Response
+    {
+
+        $_SESSION['logged'] = false;
+        session_destroy();
+
+        return $this->container->get('view')->render($response, 'index.twig', [
+            'success' => 'Logged Out, See you Soon!',
+            'logged' => $_SESSION['logged'],
+        ]);
 
     }
 

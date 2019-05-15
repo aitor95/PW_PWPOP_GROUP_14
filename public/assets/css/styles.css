@@ -29,7 +29,10 @@ h1{
     height: 80.6vh;
 }
 .success{
-    color: green;
+    color: white !important;
+    text-align: center;
+    background: #3AB19B;
+    padding: 1% 0;
 }
 .login-grid{
     grid-column: 1/5;
@@ -94,6 +97,7 @@ h1{
 .image-error{
     background-size: cover;
     margin-bottom: 0;
+    text-align: center;
 }
 
 .message{

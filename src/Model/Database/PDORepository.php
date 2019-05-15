@@ -76,7 +76,8 @@ final class PDORepository implements UserRepositoryInterface{
         for ($i=0; $i < sizeof($data) ; $i++) {
             if($email == $data[$i]['email']){
                 $registered+=3;
-            }elseif($username == $data[$i]['username']){
+            }
+            if($username == $data[$i]['username']){
                 $registered++;
             }
         }

@@ -36,8 +36,9 @@ $container['user_repo'] = function (Container $c) {
     return new PDORepository($c->get('db'));
 };
 
+// Register provider
 $container['flash'] = function () {
-    return new Messages();
+    return new \Slim\Flash\Messages();
 };
 
 

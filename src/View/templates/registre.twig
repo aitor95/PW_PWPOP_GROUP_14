@@ -17,14 +17,14 @@
                             <div class="input-field col s6">
                                 <input type="text" name="username" id="username" required>
                                 <label for="username">Username</label>
-                                <span class="helper-text" id="message-username"></span>
+                                <span class="error" id="message-username">{{ errorUsername }}</span>
                             </div>
                         </div>
                         <div class="row">
                             <div class="input-field col s6">
                                 <input id="email" type="text" name="email" required>
                                 <label for="email">Email</label>
-                                <span class="helper-text" id="message-email"></span>
+                                <span class="error" id="message-email">{{ errorEmail }}</span>
                             </div>
                             <div class="input-field col s6">
                                 <input type="text" id="datepicker" class="datepicker" name="birthDate">
@@ -41,6 +41,7 @@
                                 <div class="btn">
                                     <span>Image</span>
                                     <input type="file" name="files[]">
+                                    <span class="error" id="message-email">{{ errorImg }}</span>
                                 </div>
                                 <div class="file-path-wrapper">
                                     <input class="file-path validate" id="file" name="files[]" type="text" placeholder="Choose an image">
