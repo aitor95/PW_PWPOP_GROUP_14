@@ -33,7 +33,10 @@ final class UserController{
             /** @var PDORepository $repository */
             $repository = $this->container->get('user_repo');
 
-            // We should validate the information before creating the entity
+            //Controlamos si la imagen es correcta y que el usuario no este registrado (email o username)
+            $registered = $repository->isRegistered($data['email'], $data['username']);
+            $name = (new FileController)->uploadAction($request,$response,$data['username']);
+
             $user = new User(
                 $data['email'],
                 $data['password'],
@@ -42,19 +45,16 @@ final class UserController{
                 $data['username'],
                 $data['phone'],
                 new DateTime(),
-                new DateTime()
+                new DateTime(),
+                $name
             );
-
-            //Controlamos si la imagen es correcta y que el usuario no este registrado (email o username)
-            $registered = $repository->isRegistered($data['email'], $data['username']);
-            $name = (new FileController)->uploadAction($request,$response,$data['username']);
 
             //TODO: Implementar FLASH MESSAGES
             if (!($name == '') && ($registered == 0)) {
 
                 //Si es correcta guardamos al usario en la database
                 $repository->save($user,$name);
-                //header("refresh: 3");
+
                 return $this->container->get('view')->render($response, 'login.twig', [
                     'success' => 'Registrat correctament!',
                     'logged' => $_SESSION['logged'],
@@ -100,23 +100,21 @@ final class UserController{
     {
         try{
 
-        //Preguntar a la database si hay algun usuario que concorda
         $data = $request->getParsedBody();
 
         /** @var PDORepository $repository */
         $repository = $this->container->get('user_repo');
 
 
-        //TODO: Implementar FLASH MESSAGES
-
         if($repository->login($data['email'], $data['password'])){
 
             //Login
-            $_SESSION['logged'] = true;
+            $_SESSION['success_message'] = 'Login Success!';
             $_SESSION['email'] = $data['email'];
+            $_SESSION['logged'] = true;
 
             return $this->container->get('view')->render($response, 'index.twig', [
-                'success' => 'Login Success!',
+                'success_message' => 'Login Success!',
                 'logged' => $_SESSION['logged'],
             ]);
 
@@ -144,9 +142,10 @@ final class UserController{
 
         $_SESSION['logged'] = false;
         session_destroy();
+        $_SESSION['success_message'] = 'Logged Out, See you Soon!';
 
         return $this->container->get('view')->render($response, 'index.twig', [
-            'success' => 'Logged Out, See you Soon!',
+            'success_message' => $_SESSION['success_message'],
             'logged' => $_SESSION['logged'],
         ]);
 

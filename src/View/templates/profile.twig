@@ -14,7 +14,8 @@
                         <ul id="nav-mobile" class="right hide-on-med-and-down">
                             <li><a href="{{ base_url }}/search"><i class="tiny material-icons">search</i></a></li>
                             {% if  logged  == true %}
-                                <li><a href="{{ base_url }}/profile">Profile</a></li>
+                                <li><a href="{{ base_url }}/profile"><i class="tiny material-icons">person</i></a></li>
+                                <li><a href="{{ base_url }}/upload"> <i class="tiny material-icons">playlist_add</i></a></li>
                                 <li><a href="{{ base_url }}/logout" methods="post" ><i class="tiny material-icons">power_settings_new</i></a></li>
                             {% else %}
                                 <li><a href="{{ base_url }}/403">Profile</a></li>
@@ -38,38 +39,38 @@
         <div class="wrapper-profile">
             <div class="left-grid">
                 <div class="image_user">
-                    <img src="{{ base_url}}/assets/img/user1.png" alt="">
+                    <img src="{{ base_url}}/assets/img/Uploads/{{ profileImg }}" alt="">
                 </div>
                 <div class="profile_info">
-                        <p class="name">Samantha Cito</p>
+                        <p class="name">{{ name }}</p>
                         <form action="#" class="vol s12" id="formulario" method="post">
                             <div class="row">
                                 <div class="input-field col s6">
                                     <input id="name" type="text" name="name" required>
-                                    <label for="name">Name</label>
+                                    <label for="name">{{ name }}</label>
                                     <span class="helper-text" id="message-name"></span>
                                 </div>
                                 <div class="input-field col s6">
                                     <input type="text" name="username" id="username" disabled required>
-                                    <label for="username">Username</label>
+                                    <label for="username">{{ username }}</label>
                                     <span class="helper-text" id="message-username"></span>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="input-field col s6">
                                     <input id="email" type="text" name="email" required>
-                                    <label for="email">Email</label>
+                                    <label for="email">{{ email }}</label>
                                     <span class="helper-text" id="message-email"></span>
                                 </div>
                                 <div class="input-field col s6">
                                     <input type="text" id="datepicker" class="datepicker" name="birthDate">
-                                    <label for="datepicker">Birthdate</label>
+                                    <label for="datepicker">{{ birthDate }}</label>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="input-field col s6">
                                     <input id="phone" type="tel" name="phone" required>
-                                    <label for="phone">Phone Number</label>
+                                    <label for="phone">{{ phone }}</label>
                                     <span class="helper-text" id="message-phone"></span>
                                 </div>
                                 <div class="file-field input-field col s6">
@@ -99,17 +100,6 @@
 
                         </form>
                 </div>
-                <!--
-                <div class="profile_info">
-                    <p class="name">Samantha Cito</p>
-                    <p class="nickname"> Nickname</p>
-                    <hr>
-                    <p class="birthdate"><i class="tiny material-icons">cake</i> Birthday</p>
-                    <p class="phone"><i class="tiny material-icons">local_phone</i> Phone Number</p>
-                    <p class="email" contenteditable="true"><i class="tiny material-icons">mail</i> Email</p>
-                    <span class="mail">@e-mail</span>
-                </div>
-                -->
             </div>
 
         </div>
@@ -117,4 +107,9 @@
             <p>PWPOP &copy; 2019 </p>
         </footer>
 
+    {% endblock %}
+
+    {% block scripts %}
+        {{ parent() }}
+        <script src="{{ base_url }}/assets/js/script.js"></script>
     {% endblock %}

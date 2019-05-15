@@ -14,7 +14,8 @@
                         <ul id="nav-mobile" class="right hide-on-med-and-down">
                             <li><a href="{{ base_url }}/search"><i class="tiny material-icons">search</i></a></li>
                             {% if  logged  == true %}
-                                <li><a href="{{ base_url }}/profile">Profile</a></li>
+                                <li><a href="{{ base_url }}/profile"><i class="tiny material-icons">person</i></a></li>
+                                <li><a href="{{ base_url }}/upload"> <i class="tiny material-icons">playlist_add</i></a></li>
                                 <li><a href="{{ base_url }}/logout" methods="post" ><i class="tiny material-icons">power_settings_new</i></a></li>
                             {% else %}
                                 <li><a href="{{ base_url }}/403">Profile</a></li>
@@ -32,8 +33,8 @@
                 <li><a href="{{ base_url }}/login">Sign In</a></li>
                 <li><a href="{{ base_url }}/registre">Sign Up</a></li>
         </ul>
-        {% if  success!=null %}
-            <p class="success">{{ success }}</p>
+        {% if  success_message != null %}
+            <p class="success">{{ success_message }}</p>
         {% endif %}
 
         <div class="container container-margin">

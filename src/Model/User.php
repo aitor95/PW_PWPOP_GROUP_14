@@ -33,6 +33,9 @@ final class User{
     /** @var DateTime */
     private $updatedAt;
 
+    /** @var string */
+    private $profileImg;
+
 
     /**
      * User constructor.
@@ -44,7 +47,7 @@ final class User{
      * @param DateTime $createdAt
      * @param DateTime $updatedAt
      */
-    public function __construct(string $email, string $password, string $birthDate,string $name , string $username, int $phone, DateTime $createdAt, DateTime $updatedAt) {
+    public function __construct(string $email, string $password, string $birthDate,string $name , string $username, int $phone, DateTime $createdAt, DateTime $updatedAt, string $profileImg) {
 
         $this->email = $email;
         $this->password = $password;
@@ -54,6 +57,7 @@ final class User{
         $this->phone = $phone;
         $this->createdAt = $createdAt;
         $this->updatedAt = $updatedAt;
+        $this->profileImg = $profileImg;
 
     }
 
@@ -199,6 +203,22 @@ final class User{
     public function setPhone($phone): void
     {
         $this->phone = $phone;
+    }
+
+    /**
+     * @return string
+     */
+    public function getProfileImg(): string
+    {
+        return $this->profileImg;
+    }
+
+    /**
+     * @param string $profileImg
+     */
+    public function setProfileImg($profileImg)
+    {
+        $this->profileImg = $profileImg;
     }
 
 

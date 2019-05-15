@@ -77,3 +77,8 @@
 
 
     {% endblock %}
+
+    {% block scripts %}
+        {{ parent() }}
+        <script src="{{ base_url }}/assets/js/script.js"></script>
+    {% endblock %}

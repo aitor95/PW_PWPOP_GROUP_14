@@ -5,6 +5,7 @@ namespace PwPop\Model\Database;
 use PDO;
 use PwPop\Model\User;
 use PwPop\Model\UserRepositoryInterface;
+use DateTime;
 
 final class PDORepository implements UserRepositoryInterface{
 
@@ -90,11 +91,28 @@ final class PDORepository implements UserRepositoryInterface{
     public function takeUser(string $email): User
     {
 
-        $statement = $this->database->connection->prepare('SELECT * FROM user WHERE email = :email');
-        $statement->bindParam('email', $email, PDO::PARAM_STR);
-        $info = $statement->execute();
-        $data = $info->fetchAll();
+        $query = "SELECT * FROM user WHERE email=\"" . $email . "\"";
+        $stmt = $this->database->connection->prepare($query);
+        $stmt->execute();
+        $data = $stmt->fetch();
 
+        $datetime = new DateTime();
+        $newDate = $datetime->createFromFormat('Y/M/D H:i:s', $data['created_at']);
+
+        $datetime2 = new DateTime();
+        $newDate2 = $datetime2->createFromFormat('Y/M/D H:i:s', $data['updated_at']);
+
+        $user = new User(
+            $data['email'],
+            $data['password'],
+            $data['birth_date'],
+            $data['name'],
+            $data['username'],
+            $data['phone'],
+            $datetime,
+            $datetime2,
+            $data['profileImg']
+        );
 
         return $user;
     }
