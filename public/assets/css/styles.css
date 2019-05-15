@@ -166,6 +166,16 @@ h1{
     left: 45%;
 }
 
+.profile_info-2{
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+//border: 1px solid red;
+    width: 50%;
+    height: 50vh;
+    top: 19%;
+    left: 7%;
+}
 hr{
     border: 0;
     height: 1px;
@@ -209,8 +219,14 @@ hr{
     text-align: center
 }
 
-.right-grid p{
+.right-grid p:not(:first-child){
     width: 70%;
+    color: white;
+    font-weight: 300;
+    text-align: center;
+    font-size: 1.5em;
+}
+.right-grid p:first-child{
     color: white;
     font-weight: 300;
     text-align: center;
