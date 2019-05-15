@@ -28,7 +28,9 @@ h1{
     grid-template-columns: repeat(6, 1fr);
     height: 80.6vh;
 }
-
+.success{
+    color: green;
+}
 .login-grid{
     grid-column: 1/5;
     align-items: center;

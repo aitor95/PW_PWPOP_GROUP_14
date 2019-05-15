@@ -43,6 +43,7 @@ function validaFormulario(event){
     } else {
         message_name.innerHTML = "";
         message_name.classList.remove("error");
+        devolver = true;
     }
 
     var username = document.getElementById("username").value;
@@ -53,19 +54,21 @@ function validaFormulario(event){
         devolver = false;
     }  else {
         message_username.innerHTML = "";
+        devolver = true;
     }
 
-    /*var email = document.getElementById("email").value;
+    var email = document.getElementById("email").value;
     var message_email = document.getElementById("message-email");
     //COMENTARIO REALIZADO PORQUE NO DETECTA BIEN EL CORREO
-    //if (!/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email) || email.length > 20){
-    if(0 == 1){
+    if (!
+        /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email) || email.length > 20){
         message_email.innerHTML = "Please enter a valid email address.";
         message_email.classList.add("error");
         devolver = false;
     } else {
         message_email.classList.remove("error");
-    }*/
+        devolver = true;
+    }
 
     var phone = document.getElementById("phone").value;
     var message_phone = document.getElementById("message-phone");
@@ -75,6 +78,7 @@ function validaFormulario(event){
         devolver = false;
     } else {
         message_phone.classList.remove("error");
+        devolver = true;
     }
 
     var password = document.getElementById("password").value;
@@ -85,6 +89,7 @@ function validaFormulario(event){
         devolver = false;
     } else {
         message_password.innerHTML = "";
+        devolver = true;
     }
 
     var confirmpassword = document.getElementById("confirm-password").value;
@@ -92,6 +97,7 @@ function validaFormulario(event){
     if (confirmpassword.length < 6 ) {
         message_confirm.innerText = "Minimum 6 characters";
         message_confirm.classList.add("error");
+        devolver = false;
     } else {
         if (confirmpassword !== password){
             message_confirm.innerHTML = "Passwords must match";
@@ -99,6 +105,7 @@ function validaFormulario(event){
             devolver = false;
         } else {
             message_confirm.innerHTML = "";
+            devolver = true;
         }
     }
 

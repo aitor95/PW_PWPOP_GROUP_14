@@ -33,8 +33,68 @@
         <div class="wrapper-profile">
             <div class="left-grid">
                 <div class="image_user">
-                    <img src="{{ base_url}}/assets/img/2.jpg" alt="">
+                    <img src="{{ base_url}}/assets/img/user1.png" alt="">
                 </div>
+                <div class="profile_info">
+                        <p class="name">Samantha Cito</p>
+                        <form action="#" class="vol s12" id="formulario" method="post">
+                            <div class="row">
+                                <div class="input-field col s6">
+                                    <input id="name" type="text" name="name" required>
+                                    <label for="name">Name</label>
+                                    <span class="helper-text" id="message-name"></span>
+                                </div>
+                                <div class="input-field col s6">
+                                    <input type="text" name="username" id="username" disabled required>
+                                    <label for="username">Username</label>
+                                    <span class="helper-text" id="message-username"></span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="input-field col s6">
+                                    <input id="email" type="text" name="email" required>
+                                    <label for="email">Email</label>
+                                    <span class="helper-text" id="message-email"></span>
+                                </div>
+                                <div class="input-field col s6">
+                                    <input type="text" id="datepicker" class="datepicker" name="birthDate">
+                                    <label for="datepicker">Birthdate</label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="input-field col s6">
+                                    <input id="phone" type="tel" name="phone" required>
+                                    <label for="phone">Phone Number</label>
+                                    <span class="helper-text" id="message-phone"></span>
+                                </div>
+                                <div class="file-field input-field col s6">
+                                    <div class="btn">
+                                        <span>Image</span>
+                                        <input type="file" name="files[]">
+                                    </div>
+                                    <div class="file-path-wrapper">
+                                        <input class="file-path validate" id="file" name="files[]" type="text" placeholder="Choose an image">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="input-field col s6">
+                                    <input id="password" type="password" name="password" required>
+                                    <label for="password">Password</label>
+                                    <span class="helper-text" id="message-password"></span>
+                                </div>
+                                <div class="input-field col s6">
+                                    <input id="confirm-password" type="password" name="passwordConfirm" required>
+                                    <label for="confirm-password">Confirm Password</label>
+                                    <span class="helper-text" id="message-confirm-password"></span>
+                                </div>
+                            </div>
+
+                            <button class="waves-effect waves-light btn-large hack" type="submit" formaction="#" formmethod="post" value="upload">Save </button>
+
+                        </form>
+                </div>
+                <!--
                 <div class="profile_info">
                     <p class="name">Samantha Cito</p>
                     <p class="nickname"> Nickname</p>
@@ -44,6 +104,7 @@
                     <p class="email" contenteditable="true"><i class="tiny material-icons">mail</i> Email</p>
                     <span class="mail">@e-mail</span>
                 </div>
+                -->
             </div>
 
         </div>
