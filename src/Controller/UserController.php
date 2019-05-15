@@ -113,6 +113,7 @@ final class UserController{
 
             //Login
             $_SESSION['logged'] = true;
+            $_SESSION['email'] = $data['email'];
 
             return $this->container->get('view')->render($response, 'index.twig', [
                 'success' => 'Login Success!',

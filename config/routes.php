@@ -4,6 +4,7 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
 use PwPop\Controller\UserController;
 use PwPop\Controller\Middleware\SessionMiddleware;
+use PwPop\Controller\ProfileController;
 
 
 $app->get('/login', function (Request $request, Response $response, array $args) {
@@ -31,11 +32,7 @@ $app->get('/search', function (Request $request, Response $response, array $args
     ]);
 });
 
-$app->get('/profile', function (Request $request, Response $response, array $args) {
-    return $this->view->render($response, 'profile.twig', [
-        'logged' => $_SESSION['logged'],
-    ]);
-});
+//$app->get('/profile', ProfileController::class.':profileUpdate');
 
 $app->get('/403', function (Request $request, Response $response, array $args) {
     return $this->view->render($response, '403.twig', [

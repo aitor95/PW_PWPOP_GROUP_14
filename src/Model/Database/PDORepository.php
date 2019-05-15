@@ -85,4 +85,17 @@ final class PDORepository implements UserRepositoryInterface{
         return $registered;
 
     }
+
+
+    public function takeUser(string $email): User
+    {
+
+        $statement = $this->database->connection->prepare('SELECT * FROM user WHERE email = :email');
+        $statement->bindParam('email', $email, PDO::PARAM_STR);
+        $info = $statement->execute();
+        $data = $info->fetchAll();
+
+
+        return $user;
+    }
 }
