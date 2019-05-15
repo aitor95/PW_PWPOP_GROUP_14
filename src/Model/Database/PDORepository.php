@@ -20,11 +20,11 @@ final class PDORepository implements UserRepositoryInterface{
         $this->database = $database;
     }
 
-    public function save(User $user) {
+    public function save(User $user, string $profile) {
 
         $statement = $this->database->connection->prepare(
-            "INSERT INTO user(email, password, birth_date, name, username, phone, created_at, updated_at) 
-                        values(:email, :password, :birth_date, :name, :username, :phone, :created_at, :updated_at)");
+            "INSERT INTO user(email, password, birth_date, name, username, phone, created_at, updated_at, profileImg) 
+                        values(:email, :password, :birth_date, :name, :username, :phone, :created_at, :updated_at, :profileImg)");
 
         $email = $user->getEmail();
         $password = $user->getPassword();
@@ -35,6 +35,7 @@ final class PDORepository implements UserRepositoryInterface{
         $phone = $user->getPhone();
         $createdAt = $user->getCreatedAt()->format('Y-m-d H:i:s');
         $updatedAt = $user->getUpdatedAt()->format('Y-m-d H:i:s');
+        $profileImg = $profile;
 
         $statement->bindParam('email', $email, PDO::PARAM_STR);
         $statement->bindParam('password', $passcrypted, PDO::PARAM_STR);
@@ -44,6 +45,7 @@ final class PDORepository implements UserRepositoryInterface{
         $statement->bindParam('phone', $phone, PDO::PARAM_STR);
         $statement->bindParam('created_at', $createdAt, PDO::PARAM_STR);
         $statement->bindParam('updated_at', $updatedAt, PDO::PARAM_STR);
+        $statement->bindParam('profileImg', $profileImg, PDO::PARAM_STR);
 
         $statement->execute();
     }
@@ -63,5 +65,23 @@ final class PDORepository implements UserRepositoryInterface{
         }
 
         return $registered;
+    }
+
+    public function isRegistered(string $email, string $username): int{
+
+        $info = $this->database->connection->query('SELECT * FROM user');
+        $data = $info->fetchAll();
+
+        $registered = 0;
+        for ($i=0; $i < sizeof($data) ; $i++) {
+            if($email == $data[$i]['email']){
+                $registered+=3;
+            }elseif($username == $data[$i]['username']){
+                $registered++;
+            }
+        }
+
+        return $registered;
+
     }
 }

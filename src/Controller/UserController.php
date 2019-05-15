@@ -45,16 +45,40 @@ final class UserController{
                 new DateTime()
             );
 
-            $repository->save($user);
-            //Guardamos la imagen también
-            //$response = (new FileController)->uploadAction($request,$response);
+            //Controlamos si la imagen es correcta y que el usuario no este registrado (email o username)
+            $registered = $repository->isRegistered($data['email'], $data['username']);
+            $name = (new FileController)->uploadAction($request,$response,$data['username']);
 
-            //TODO: Implementar mensaje flash de registrat correctament
+            //TODO: Implementar FLASH MESSAGES
+            if (!($name == '') && ($registered == 0)) {
 
-            header("Location: /login");
-            exit;
-            //PENE
-            //----------------------------------------------------------------------------
+                //Si es correcta guardamos al usario en la database
+                $repository->save($user,$name);
+                header("Location: /login");
+                exit;
+
+            } else {
+
+                if ($name == '') {
+                    //DISPLAY ERROR IMG
+
+                    header("Location: /registre");
+                    exit;
+                }
+                if ($registered >= 3) {
+                    //DISPLAY ERROR EN EMAIL
+
+                    header("Location: /registre");
+                    exit;
+                }
+                if ($registered == 4 || $registered == 1) {
+                    //DISPLAY ERROR EN USERNAME
+
+                    header("Location: /registre");
+                    exit;
+                }
+
+            }
 
         } catch (\Exception $e) {
             $response->getBody()->write('Unexpected error: ' . $e->getMessage());
@@ -68,24 +92,24 @@ final class UserController{
     {
         try{
 
-
         //Preguntar a la database si hay algun usuario que concorda
         $data = $request->getParsedBody();
 
         /** @var PDORepository $repository */
         $repository = $this->container->get('user_repo');
 
+
+        //TODO: Implementar FLASH MESSAGES
+
         if($repository->login($data['email'], $data['password'])){
 
             //Login
-            header("Location: /index");
+            header("Location: /");
             exit;
 
         }else{
 
-            //Try Again (No se porque no muestra el alert (por el exit, pero es necesario para cambiar de pagina))
-            $alert = "Not Registered, Try Again";
-            echo "<script type='text/javascript'>alert('$alert');</script>";
+            //No acierta usuario o contraseña
             header("Location: /login");
             exit;
 
@@ -101,3 +125,5 @@ final class UserController{
     }
 
 }
+
+

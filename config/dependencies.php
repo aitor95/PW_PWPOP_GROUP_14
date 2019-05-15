@@ -9,6 +9,7 @@ use Slim\Container;
 $container = $app->getContainer();
 
 $container['view'] = function ($c) {
+
     $view = new \Slim\Views\Twig(__DIR__ . '/../src/View/templates', [
         'cache' => false, //__DIR__ . '/../var/cache'
     ]);
@@ -38,5 +39,6 @@ $container['user_repo'] = function (Container $c) {
 $container['flash'] = function () {
     return new Messages();
 };
+
 
 return $container;

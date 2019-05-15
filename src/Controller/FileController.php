@@ -9,27 +9,24 @@ use Psr\Http\Message\UploadedFileInterface;
 
 final class FileController
 {
-    private const UPLOADS_DIR = __DIR__ . '/../../uploads';
+    private const UPLOADS_DIR = __DIR__ . '/../../public/assets/img/Uploads';
 
     private const UNEXPECTED_ERROR = "An unexpected error occurred uploading the file '%s'...";
 
     private const INVALID_EXTENSION_ERROR = "The received file extension '%s' is not valid";
 
-    // We use this const to define the extensions that we are going to allow
-    private const ALLOWED_EXTENSIONS = ['jpg', 'png'];
+    private const ALLOWED_EXTENSIONS = ['jpg', 'png', 'jpeg'];
 
 
-
-    public function uploadAction(Request $request, Response $response): Response
+    public function uploadAction(Request $request, Response $response, string $user):string
     {
         $uploadedFiles = $request->getUploadedFiles();
 
         $errors = [];
-        echo('Aqui');
+        $name = '';
 
-        /** @var UploadedFileInterface $uploadedFile */
+        /* @var UploadedFileInterface $uploadedFile */
         foreach ($uploadedFiles['files'] as $uploadedFile) {
-            echo('Aqui');
 
             if ($uploadedFile->getError() !== UPLOAD_ERR_OK) {
                 $errors[] = sprintf(self::UNEXPECTED_ERROR, $uploadedFile->getClientFilename());
@@ -47,16 +44,17 @@ final class FileController
                 continue;
             }
 
+            $name = "Profile_". $user . "." . $format;
             // We generate a custom name here instead of using the one coming form the form
             $uploadedFile->moveTo(self::UPLOADS_DIR . DIRECTORY_SEPARATOR . $name);
         }
 
-        return $response;
-
+        return $name;
     }
 
-    private function isValidFormat(string $extension): bool
-    {
+    private function isValidFormat(string $extension): bool {
+
         return in_array($extension, self::ALLOWED_EXTENSIONS, true);
+
     }
-}
+ }

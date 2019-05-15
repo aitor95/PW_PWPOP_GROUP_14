@@ -12,6 +12,7 @@ $app->get('/login', function (Request $request, Response $response, array $args)
 });
 
 $app->get('/registre', function (Request $request, Response $response, array $args) {
+
     return $this->view->render($response, 'registre.twig', [
        // 'name' => $args['name']
     ]);
@@ -40,6 +41,7 @@ $app->get('/403', function (Request $request, Response $response, array $args) {
         // 'name' => $args['name']
     ]);
 });
+
 $app->post('/registration',UserController::class . ':registerAction');
 
 $app->post('/user',UserController::class . ':loginAction');
