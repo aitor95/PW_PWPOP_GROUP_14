@@ -41,10 +41,10 @@
             <div class="left-grid">
                 <div class="profile_info">
                     <p class="name">Upload Product</p>
-                    <form action="#" class="vol s12" id="formulario" method="post">
+                    <form action="#" class="vol s12" id="formulario" method="post" enctype="multipart/form-data">
                         <div class="row">
                             <div class="input-field col s6">
-                                <input id="title" type="text" name="title" required>
+                                <input id="title" type="text" name="title" >
                                 <label for="title">Title</label>
                                 <span class="helper-text" id="message-title"></span>
                             </div>
@@ -64,7 +64,7 @@
                         </div>
                         <div class="row">
                             <div class="input-field col s6">
-                                <input id="price" type="text" name="price" required>
+                                <input id="price" type="text" name="price" >
                                 <label for="price">Price</label>
                                 <span class="helper-text" id="message-price"></span>
                             </div>
@@ -81,14 +81,14 @@
                         </div>
                         <div class="row">
                             <div class="input-field col s12">
-                                <textarea id="textarea" class="materialize-textarea"></textarea>
+                                <textarea id="textarea" class="materialize-textarea" required></textarea>
                                 <label for="textarea1">Description</label>
-                                <span class="helper-text" id="message-textarea"></span>
+                                <span class="helper-text" id="message-description"></span>
                             </div>
 
                         </div>
 
-                        <button class="waves-effect waves-light btn-large hack" type="submit" formaction="#" formmethod="post" value="upload">Upload </button>
+                        <button id="upload" class="waves-effect waves-light btn-large hack" type="submit" formaction="{{ base_url }}/registration" formmethod="post" value="upload">Upload </button>
 
                     </form>
                 </div>

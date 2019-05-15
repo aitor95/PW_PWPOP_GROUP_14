@@ -5,7 +5,7 @@ return [
         'displayErrorDetails' => true,
         'db' => [
             'username' => 'root',
-            'password' => 'root',
+            'password' => '',
             'dbName' => 'pwpop',
             'host' => 'localhost',
         ],

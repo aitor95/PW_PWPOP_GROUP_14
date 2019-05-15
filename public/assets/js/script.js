@@ -14,6 +14,9 @@ M.Slider.init(Slider, {
     interval: 6000
 });
 
+var Selector = document.querySelector('.selector');
+M.FormSelect.init(Selector, {});
+
 //Autocomplete
 var Autocomplete = document.querySelector('.autocomplete');
 M.Autocomplete.init(Autocomplete, {
