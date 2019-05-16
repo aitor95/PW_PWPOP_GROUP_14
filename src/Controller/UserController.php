@@ -49,7 +49,6 @@ final class UserController{
                 $name
             );
 
-            //TODO: Implementar FLASH MESSAGES
             if (!($name == '') && ($registered == 0)) {
 
                 //Si es correcta guardamos al usario en la database

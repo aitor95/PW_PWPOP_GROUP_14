@@ -5,6 +5,7 @@ use Psr\Http\Message\ResponseInterface as Response;
 use PwPop\Controller\UserController;
 use PwPop\Controller\Middleware\SessionMiddleware;
 use PwPop\Controller\ProfileController;
+use PwPop\Controller\ProductController;
 
 
 $app->get('/login', function (Request $request, Response $response, array $args) {
@@ -54,6 +55,8 @@ $app->post('/registration',UserController::class . ':registerAction');
 $app->post('/modify',ProfileController::class . ':modifyAction');
 
 $app->post('/user',UserController::class . ':loginAction');
+
+$app->post('/uploadProduct', ProductController::class . ':uploadAction');
 
 $app->add(SessionMiddleware::class);
 
