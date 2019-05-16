@@ -3,14 +3,14 @@ M.Datepicker.init(Calendar, {
     format: 'dd-mmmm-yyyy'
 });
 
-var sideNav = document.querySelector('.sidenav');
+const sideNav = document.querySelector('.sidenav');
 M.Sidenav.init(sideNav, {});
 
 var Slider = document.querySelector('.slider');
 M.Slider.init(Slider, {
-    indicators: false,
     height: 300,
     transition: 500,
+    indicators: true,
     interval: 6000
 });
 

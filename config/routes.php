@@ -48,6 +48,12 @@ $app->get('/upload', function (Request $request, Response $response, array $args
     ]);
 });
 
+$app->get('/product', function (Request $request, Response $response, array $args) {
+    return $this->view->render($response, 'product.twig', [
+        'logged' => $_SESSION['logged'] ?? null
+    ]);
+});
+
 $app->get('/logout', UserController::class.':logOut');
 
 $app->post('/registration',UserController::class . ':registerAction');

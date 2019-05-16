@@ -3,7 +3,6 @@ body {
     margin: 0;
     padding: 0;
     font-family: Montserrat, sans-serif;
-
 }
 
 h1{
@@ -131,6 +130,7 @@ h1{
     background-position: center;
     width: 100%;
     flex-direction: column;
+    margin-bottom: -12px;
 }
 
 .left-grid {
@@ -142,7 +142,7 @@ h1{
     background-position: center;
     width: 100%;
     flex-direction: column;
-    height: 80.6vh;
+    height: 82.6vh;
 }
 .image_user{
     width: 302px;
@@ -170,12 +170,68 @@ h1{
     position: absolute;
     display: flex;
     flex-direction: column;
-//border: 1px solid red;
     width: 50%;
     height: 50vh;
     top: 19%;
     left: 7%;
 }
+.right-grid > .profile_info-3{
+    width: 100%;
+    left: 0;
+}
+
+.formulario-product{
+    margin-top: 50px;
+}
+.profile_info-3{
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    height: 50vh;
+    top: 19%;
+}
+
+.profile_info-3 > .name {
+    width: 80%;
+    border: 0;
+    margin: 0 auto;
+}
+
+.image-product{
+    position: relative;
+    margin: 20px auto 50px;
+    padding-bottom: 40px;
+    top: 17%;
+    text-align: center;
+}
+
+.image-product a{
+    display: block;
+    position: relative;
+    margin: 0 auto;
+    width: 95%;
+    -webkit-transition: all .2s linear;
+    -moz-transition: all .2s linear;
+    -ms-transition: all .2s linear;
+    -o-transition: all .2s linear;
+    transition: all .2s linear;
+}
+
+.image-product a:after{
+    content:'';
+    display: block;
+    position: absolute;
+    left: 50%;
+    top: 105%;
+    width: 100%;
+    max-width: 300px;
+    height: 10px;
+    background: transparent;
+    transform: translateX(-50%);
+    border-radius: 100px/50px;
+    box-shadow: 0 50px 40px rgba(0,0,0,0.5);
+}
+
 hr{
     border: 0;
     height: 1px;
@@ -271,6 +327,7 @@ a {
 
 .container-margin{
     margin-top: 1em;
+    margin-bottom: 6em;
 }
 .nav-wrapper .brand-logo{
     font-weight: 300;
@@ -314,4 +371,35 @@ a {
 }
 .waves-effect.waves-light.btn-large.hack{
     margin-top: -20px !important;
+}
+.heart-hack{
+    right: 80px !important;
+}
+
+.product-info{
+    width: 50%;
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100vh;
+    background-color: #eeeeee;
+    z-index: -1;
+}
+.product-info p{
+    width: 200px;
+    height: 500px;
+    border: 1px solid red;
+}
+.product-left{
+    width: 50%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100vh;
+}
+footer{
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    z-index: 1;
 }
