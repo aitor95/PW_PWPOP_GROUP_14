@@ -46,31 +46,31 @@
                         <form action="#" class="vol s12" id="formulario" method="post" enctype="multipart/form-data">
                             <div class="row">
                                 <div class="input-field col s6">
-                                    <input id="name" type="text" name="name" required>
-                                    <label for="name">{{ name }}</label>
+                                    <input value="{{ name }}" id="name" type="text" name="name">
+                                    <label for="name"></label>
                                     <span class="helper-text" id="message-name"></span>
                                 </div>
                                 <div class="input-field col s6">
-                                    <input type="text" name="username" id="username" disabled required>
-                                    <label for="username">{{ username }}</label>
+                                    <input value="{{ username }}" type="text" name="username" id="username" disabled>
+                                    <label for="username" ></label>
                                     <span class="helper-text" id="message-username"></span>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="input-field col s6">
-                                    <input id="email" type="text" name="email" required>
-                                    <label for="email">{{ email }}</label>
-                                    <span class="helper-text" id="message-email"></span>
+                                    <input value="{{ email }}" id="email" type="text" name="email">
+                                    <label for="email"></label>
+                                    <span class="helper-text" id="message-email">{{ error_message }}</span>
                                 </div>
                                 <div class="input-field col s6">
-                                    <input type="text" id="datepicker" class="datepicker" name="birthDate">
-                                    <label for="datepicker">{{ birthDate }}</label>
+                                    <input value="{{ birthDate }}" type="text" id="datepicker" class="datepicker" name="birthDate">
+                                    <label for="datepicker"></label>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="input-field col s6">
-                                    <input id="phone" type="tel" name="phone" required>
-                                    <label for="phone">{{ phone }}</label>
+                                    <input value="{{ phone }}" id="phone" type="tel" name="phone">
+                                    <label for="phone"></label>
                                     <span class="helper-text" id="message-phone"></span>
                                 </div>
                                 <div class="file-field input-field col s6">
@@ -79,26 +79,31 @@
                                         <input type="file" name="files[]">
                                     </div>
                                     <div class="file-path-wrapper">
-                                        <input class="file-path validate" id="file" name="files[]" type="text" placeholder="Choose an image">
+                                        <input value="{{ profileImg }}" class="file-path validate" id="file" name="files[]" type="text" placeholder="Choose an image">
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="input-field col s6">
-                                    <input id="password" type="password" name="password" required>
+                                    <input id="password" type="password" name="password">
                                     <label for="password">Password</label>
                                     <span class="helper-text" id="message-password"></span>
                                 </div>
                                 <div class="input-field col s6">
-                                    <input id="confirm-password" type="password" name="passwordConfirm" required>
+                                    <input id="confirm-password" type="password" name="passwordConfirm">
                                     <label for="confirm-password">Confirm Password</label>
                                     <span class="helper-text" id="message-confirm-password"></span>
                                 </div>
                             </div>
 
-                            <button class="waves-effect waves-light btn-large hack" type="submit" formaction="#" formmethod="post" value="upload">Save </button>
+                            <button class="waves-effect waves-light btn-large hack" type="submit" formaction="{{ base_url }}/modify" formmethod="post" value="upload">Save </button>
 
                         </form>
+
+                    {% if  success_message != null %}
+                        <p class="success">{{ success_message }}</p>
+                    {% endif %}
+
                 </div>
             </div>
 

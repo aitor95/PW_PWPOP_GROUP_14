@@ -12,4 +12,6 @@ interface UserRepositoryInterface{
 
     public function takeUser(string $email): User;
 
+    public function update(User $user);
+
 }

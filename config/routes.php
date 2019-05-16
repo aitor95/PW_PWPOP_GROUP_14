@@ -51,6 +51,8 @@ $app->get('/logout', UserController::class.':logOut');
 
 $app->post('/registration',UserController::class . ':registerAction');
 
+$app->post('/modify',ProfileController::class . ':modifyAction');
+
 $app->post('/user',UserController::class . ':loginAction');
 
 $app->add(SessionMiddleware::class);
