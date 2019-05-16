@@ -87,7 +87,6 @@ final class PDORepository implements UserRepositoryInterface{
 
     }
 
-
     public function takeUser(string $email): User
     {
 
@@ -115,5 +114,26 @@ final class PDORepository implements UserRepositoryInterface{
         );
 
         return $user;
+    }
+
+    public function update(User $user){
+
+        $email = $user->getEmail();
+        $username = $user->getUsername();
+        $password = $user->getPassword();
+        $passcrypted = md5($password);
+        $birth_date = $user->getBirthDate();
+        $name = $user->getName();
+        $phone = $user->getPhone();
+        $updatedAt = $user->getUpdatedAt()->format('Y-m-d H:i:s');
+        $profileImg = $user->getProfileImg();
+
+        $query = "UPDATE user SET email=\"" . $email . "\", password=\"" . $passcrypted . "\", birth_date=\"" . $birth_date . "\", name=\"" . $name . "\", phone=\"" . $phone . "\", profileImg =\"" . $profileImg . "\", updated_at=\"" . $updatedAt . "\"
+        WHERE username=\"" . $username . "\"";
+
+        $statement = $this->database->connection->prepare($query);
+
+        $statement->execute();
+
     }
 }

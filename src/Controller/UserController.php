@@ -56,7 +56,7 @@ final class UserController{
                 $repository->save($user,$name);
 
                 return $this->container->get('view')->render($response, 'login.twig', [
-                    'success' => 'Registrat correctament!',
+                    'success' => 'Registration SUccess!',
                     'logged' => $_SESSION['logged'],
                 ]);
 
@@ -108,7 +108,6 @@ final class UserController{
 
         if($repository->login($data['email'], $data['password'])){
 
-            //Login
             $_SESSION['success_message'] = 'Login Success!';
             $_SESSION['email'] = $data['email'];
             $_SESSION['logged'] = true;
