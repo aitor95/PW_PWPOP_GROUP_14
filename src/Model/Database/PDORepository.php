@@ -5,7 +5,9 @@ namespace PwPop\Model\Database;
 use PDO;
 use PwPop\Model\User;
 use PwPop\Model\UserRepositoryInterface;
+use PwPop\Model\Product;
 use DateTime;
+
 
 final class PDORepository implements UserRepositoryInterface{
 
@@ -135,5 +137,45 @@ final class PDORepository implements UserRepositoryInterface{
 
         $statement->execute();
 
+    }
+
+    public function takeProducts(): array{
+
+        $info = $this->database->connection->query('SELECT * FROM product');
+        $data = $info->fetchAll();
+
+        $products = [];
+        for ($i=0; $i < sizeof($data) ; $i++) {
+            array_push($products,$data[$i]);
+        }
+
+        return $products;
+
+
+    }
+
+    public function saveProduct(Product $product) {
+
+        $statement = $this->database->connection->prepare(
+            "INSERT INTO product(id,username, title, description, price, productImg, category) 
+                        values(:id, :username, :title, :description, :price, :productImg, :category)");
+
+        $id = $product->getId();
+        $username = $product->getUsername();
+        $title = $product->getTitle();
+        $description = $product->getDescription();
+        $price = $product->getPrice();
+        $productImg = $product->getProductImg();
+        $category = $product->getCategory();
+
+        $statement->bindParam('id', $id, PDO::PARAM_STR);
+        $statement->bindParam('username', $username, PDO::PARAM_STR);
+        $statement->bindParam('title', $title, PDO::PARAM_STR);
+        $statement->bindParam('description', $description, PDO::PARAM_STR);
+        $statement->bindParam('price', $price, PDO::PARAM_STR);
+        $statement->bindParam('productImg', $productImg, PDO::PARAM_STR);
+        $statement->bindParam('category', $category, PDO::PARAM_STR);
+
+        $statement->execute();
     }
 }

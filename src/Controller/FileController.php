@@ -57,4 +57,38 @@ final class FileController
         return in_array($extension, self::ALLOWED_EXTENSIONS, true);
 
     }
+
+    public function uploadProductAction(Request $request, Response $response, string $user):string
+    {
+        $uploadedFiles = $request->getUploadedFiles();
+
+        $errors = [];
+        $name = '';
+
+        /* @var UploadedFileInterface $uploadedFile */
+        foreach ($uploadedFiles['files'] as $uploadedFile) {
+
+            if ($uploadedFile->getError() !== UPLOAD_ERR_OK) {
+                $errors[] = sprintf(self::UNEXPECTED_ERROR, $uploadedFile->getClientFilename());
+                continue;
+            }
+
+            $name = $uploadedFile->getClientFilename();
+
+            $fileInfo = pathinfo($name);
+
+            $format = $fileInfo['extension'];
+
+            if (!$this->isValidFormat($format)) {
+                $errors[] = sprintf(self::INVALID_EXTENSION_ERROR, $format);
+                continue;
+            }
+
+            $name = "Product_". $user . "." . $format;
+            // We generate a custom name here instead of using the one coming form the form
+            $uploadedFile->moveTo(self::UPLOADS_DIR . DIRECTORY_SEPARATOR . $name);
+        }
+
+        return $name;
+    }
  }

@@ -50,12 +50,12 @@
                                 <span class="helper-text" id="message-title"></span>
                             </div>
                             <div class="input-field col s6">
-                                <select class="selector">
+                                <select class="selector" id="category" name="category">
                                     <option value="" disabled selected>Choose your option</option>
                                     <option value="1">Computers and electronic</option>
                                     <option value="2">Cars</option>
                                     <option value="3">Sports</option>
-                                    <option value="4"> ames</option>
+                                    <option value="4">Games</option>
                                     <option value="5">Fashion</option>
                                     <option value="6">Home</option>
                                     <option value="7">Other</option>
@@ -82,14 +82,14 @@
                         </div>
                         <div class="row">
                             <div class="input-field col s12">
-                                <textarea id="textarea" class="materialize-textarea" required></textarea>
+                                <textarea id="textarea" class="materialize-textarea" name="description" required></textarea>
                                 <label for="textarea1">Description</label>
                                 <span class="helper-text" id="message-description"></span>
                             </div>
 
                         </div>
 
-                        <button id="upload" class="waves-effect waves-light btn-large hack" type="submit" formaction="{{ base_url }}/registration" formmethod="post" value="upload">Upload </button>
+                        <button id="upload" class="waves-effect waves-light btn-large hack" type="submit" formaction="{{ base_url }}/uploadProduct" formmethod="post" value="upload">Upload </button>
 
                     </form>
                 </div>

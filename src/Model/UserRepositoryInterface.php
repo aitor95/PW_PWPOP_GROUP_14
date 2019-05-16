@@ -2,7 +2,6 @@
 
 namespace PwPop\Model;
 
-use PwPop\Model\User;
 
 interface UserRepositoryInterface{
 
@@ -13,5 +12,9 @@ interface UserRepositoryInterface{
     public function takeUser(string $email): User;
 
     public function update(User $user);
+
+    public function takeProducts(): array;
+
+    public function saveProduct(Product $product);
 
 }
