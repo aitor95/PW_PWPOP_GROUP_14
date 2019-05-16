@@ -18,6 +18,7 @@
                                 <li><a href="{{ base_url }}/upload"> <i class="tiny material-icons">playlist_add</i></a></li>
                                 <li><a href="{{ base_url }}/product"> <i class="tiny material-icons">bookmark</i></a></li>
                                 <li><a href="{{ base_url }}/logout" methods="post" ><i class="tiny material-icons">power_settings_new</i></a></li>
+
                             {% else %}
                                 <li><a href="{{ base_url }}/403">Profile</a></li>
                                 <li><a href="{{ base_url }}/login">Sign In</a></li>
@@ -37,77 +38,71 @@
             <li><a href="{{ base_url }}/registre">Sign Up</a></li>
 
         </ul>
-        <div class="wrapper-profile">
-            <div class="left-grid">
-                <div class="image_user">
-                    <img src="{{ base_url}}/assets/img/Uploads/{{ profileImg }}" alt="">
+        <div class="container">
+            <div class="product-left">
+                <div class="image-product">
+                    <a href="#"><img src="{{ base_url }}/assets/img/user1.png" alt=""></a>
                 </div>
-                <div class="profile_info">
-                        <p class="name">{{ name }}</p>
-                        <form action="#" class="vol s12" id="formulario" method="post" enctype="multipart/form-data">
+            </div>
+            <div class="product-info">
+                <div class="right-grid">
+                    <div class="profile_info-3">
+                        <p class="name">Product Overview</p>
+                        <form action="#" class="vol s12 formulario-product" id="formulario" method="post" enctype="multipart/form-data">
+
                             <div class="row">
                                 <div class="input-field col s6">
-                                    <input value="{{ name }}" id="name" type="text" name="name">
-                                    <label for="name"></label>
-                                    <span class="helper-text" id="message-name"></span>
+                                    <input id="title" type="text" name="title" >
+                                    <label for="title">Title</label>
+                                    <span class="helper-text" id="message-title"></span>
                                 </div>
                                 <div class="input-field col s6">
-                                    <input value="{{ username }}" type="text" name="username" id="username" disabled>
-                                    <label for="username" ></label>
-                                    <span class="helper-text" id="message-username"></span>
+                                    <select class="selector">
+                                        <option value="" disabled selected>Choose your option</option>
+                                        <option value="1">Computers and electronic</option>
+                                        <option value="2">Cars</option>
+                                        <option value="3">Sports</option>
+                                        <option value="4">Games</option>
+                                        <option value="5">Fashion</option>
+                                        <option value="6">Home</option>
+                                        <option value="7">Other</option>
+                                    </select>
+                                    <label>Category</label>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="input-field col s6">
-                                    <input value="{{ email }}" id="email" type="text" name="email">
-                                    <label for="email"></label>
-                                    <span class="helper-text" id="message-email">{{ error_message }}</span>
-                                </div>
-                                <div class="input-field col s6">
-                                    <input value="{{ birthDate }}" type="text" id="datepicker" class="datepicker" name="birthDate">
-                                    <label for="datepicker"></label>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="input-field col s6">
-                                    <input value="{{ phone }}" id="phone" type="tel" name="phone">
-                                    <label for="phone"></label>
-                                    <span class="helper-text" id="message-phone"></span>
+                                    <input id="price" type="text" name="price" >
+                                    <label for="price">Price</label>
+                                    <span class="helper-text" id="message-price"></span>
                                 </div>
                                 <div class="file-field input-field col s6">
                                     <div class="btn">
                                         <span>Image</span>
-                                        <input type="file" name="files[]">
+                                        <input type="file" name="files[]" id="file_chooser">
                                     </div>
                                     <div class="file-path-wrapper">
-                                        <input value="{{ profileImg }}" class="file-path validate" id="file" name="files[]" type="text" placeholder="Choose an image">
+                                        <input class="file-path validate" id="file" name="files[]" type="text" placeholder="Choose an image">
+                                        <span class="helper-text" id="message-chooser"></span>
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="input-field col s6">
-                                    <input id="password" type="password" name="password">
-                                    <label for="password">Password</label>
-                                    <span class="helper-text" id="message-password"></span>
+                                <div class="input-field col s12">
+                                    <input type="text" id="description" required>
+                                    <label for="textarea">Description</label>
+                                    <span class="helper-text" id="message-description"></span>
                                 </div>
-                                <div class="input-field col s6">
-                                    <input id="confirm-password" type="password" name="passwordConfirm">
-                                    <label for="confirm-password">Confirm Password</label>
-                                    <span class="helper-text" id="message-confirm-password"></span>
-                                </div>
+
                             </div>
 
-                            <button class="waves-effect waves-light btn-large hack" type="submit" formaction="{{ base_url }}/modify" formmethod="post" value="upload">Save </button>
+                            <button id="upload" class="waves-effect waves-light btn-large hack" type="submit" formaction="{{ base_url }}/registration" formmethod="post" value="upload">Upload </button>
 
                         </form>
-
-                    {% if  success_message != null %}
-                        <p class="success">{{ success_message }}</p>
-                    {% endif %}
+                    </div>
 
                 </div>
             </div>
-
         </div>
         <footer class="section teal darken-2 white-text center">
             <p>PWPOP &copy; 2019 </p>
@@ -118,4 +113,5 @@
     {% block scripts %}
         {{ parent() }}
         <script src="{{ base_url }}/assets/js/script.js"></script>
+        <script src="{{ base_url }}/assets/js/upload.js"></script>
     {% endblock %}
