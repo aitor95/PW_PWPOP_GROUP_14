@@ -6,7 +6,7 @@ M.Datepicker.init(Calendar, {
 const sideNav = document.querySelector('.sidenav');
 M.Sidenav.init(sideNav, {});
 
-var Selector = document.querySelector('.selector');
+var Selector = document.querySelectorAll('.selector');
 M.FormSelect.init(Selector, {});
 
 //Autocomplete
@@ -148,4 +148,10 @@ function myFunction() {
         window.location.href = "/deleteAcc";
       }
   }
+}
+
+function deleteProduct(){
+    if (confirm("Are you sure you want to delete the product?")) {
+            window.location.href = "/deleteProd";
+    }
 }

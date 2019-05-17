@@ -92,6 +92,9 @@
         </div>
         <footer class="section teal darken-2 white-text center">
             <p>PWPOP &copy; 2019 </p>
+            {% if confirmed==0 and logged==true%}
+                <a class="btn-floating pulse yellow darken-3" href="{{ base_url }}/resend"><i class="material-icons">warning</i></a>
+            {% endif %}
         </footer>
 
     {% endblock %}

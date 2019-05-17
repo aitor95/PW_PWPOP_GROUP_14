@@ -39,6 +39,9 @@ final class User{
     /** @var int */
     private $isActive;
 
+    /** @var int */
+    private $confirmed;
+
 
     /**
      * User constructor.
@@ -50,7 +53,7 @@ final class User{
      * @param DateTime $createdAt
      * @param DateTime $updatedAt
      */
-    public function __construct(string $email, string $password, string $birthDate,string $name , string $username, int $phone, DateTime $createdAt, DateTime $updatedAt, string $profileImg, int $isActive) {
+    public function __construct(string $email, string $password, string $birthDate,string $name , string $username, int $phone, DateTime $createdAt, DateTime $updatedAt, string $profileImg, int $isActive, int $confirmed) {
 
         $this->email = $email;
         $this->password = $password;
@@ -62,6 +65,7 @@ final class User{
         $this->updatedAt = $updatedAt;
         $this->profileImg = $profileImg;
         $this->isActive = $isActive;
+        $this->confirmed = $confirmed;
 
     }
 
@@ -240,6 +244,24 @@ final class User{
     {
         $this->isActive = $isActive;
     }
+
+    /**
+     * @return int
+     */
+    public function getConfirmed(): int
+    {
+        return $this->confirmed;
+    }
+
+    /**
+     * @param int $confirmed
+     */
+    public function setConfirmed(int $confirmed): void
+    {
+        $this->confirmed = $confirmed;
+    }
+
+
 
 
 }

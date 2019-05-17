@@ -36,6 +36,7 @@ final class ProfileController{
             $user = $repository->takeUser($email);
 
             return $this->container->get('view')->render($response, 'profile.twig', [
+                'confirmed' => $_SESSION['confirmed'],
                 'logged' => $_SESSION['logged'],
                 'email' => $user->getEmail(),
                 'username' => $user->getUsername(),
@@ -95,6 +96,7 @@ final class ProfileController{
 
                 return $this->container->get('view')->render($response, 'index.twig', [
                     'success_message' => $_SESSION['success_message'],
+                    'confirmed' => $_SESSION['confirmed'],
                     'logged' => $_SESSION['logged'],
                 ]);
 
@@ -104,6 +106,7 @@ final class ProfileController{
                 $_SESSION['success_message'] = 'Email in Use!';
 
                 return $this->container->get('view')->render($response, 'index.twig', [
+                    'confirmed' => $_SESSION['confirmed'],
                     'success_message' => $_SESSION['success_message'],
                     'logged' => $_SESSION['logged'],
                 ]);
@@ -114,8 +117,6 @@ final class ProfileController{
             $response->getBody()->write('Unexpected error: ' . $e->getMessage());
             return $response->withStatus(500);
         }
-
-        return $response->withStatus(201);
 
     }
 }

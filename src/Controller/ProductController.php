@@ -65,6 +65,7 @@ final class ProductController
 
                 return $this->container->get('view')->render($response, 'index.twig', [
                     'products' => $_SESSION['products'],
+                    'confirmed' => $_SESSION['confirmed'],
                     'success_message' => $_SESSION['success_message'],
                     'email' => $_SESSION['email'] ?? null,
                     'logged' => $_SESSION['logged'],
@@ -77,6 +78,7 @@ final class ProductController
 
                 return $this->container->get('view')->render($response, 'upload.twig', [
                     'errorImg' => $errorImg,
+                    'confirmed' => $_SESSION['confirmed'],
                     'logged' => $_SESSION['logged'],
                 ]);
 
@@ -142,8 +144,8 @@ final class ProductController
                 'price' => $my_product[4],
                 'productImg' => $my_product[5],
                 'category' => $my_product[6],
-                'owner' => $owner
-
+                'owner' => $owner,
+                'confirmed' => $_SESSION['confirmed'],
             ]);
         }
 
@@ -185,6 +187,7 @@ final class ProductController
 
             return $this->container->get('view')->render($response, 'index.twig', [
                 'products' => $_SESSION['products'],
+                'confirmed' => $_SESSION['confirmed'],
                 'success_message' => $_SESSION['success_message'],
                 'email' => $_SESSION['email'] ?? null,
                 'logged' => $_SESSION['logged'],
@@ -195,8 +198,6 @@ final class ProductController
             $response->getBody()->write('Unexpected error: ' . $e->getMessage());
             return $response->withStatus(500);
         }
-
-        return $response->withStatus(201);
 
     }
 
@@ -205,20 +206,31 @@ final class ProductController
 
         try{
 
-            $data = $request->getParsedBody();
-
             /** @var PDORepository $repository */
             $repository = $this->container->get('user_repo');
 
             //repository soldout product
+            $repository->soldOutProduct($_REQUEST['image']);
+
+            $products=$repository->takeProducts();
+
+            foreach($products as $product){
+                if($product[5] == $_REQUEST['image']){
+                    $my_product = $product;
+                }
+            }
+            $buyer=$repository->takeUser($_SESSION['email']);
+            $seller = $repository->takeEmail($my_product[1]);
+
 
             //Enviar correo con info (Coger email del vendedor, y enviar usuario y mobil del comprador)
-
+            (new MailerController())->buyMail($buyer,$seller);
 
             $_SESSION['success_message'] = 'Product Buyed!';
 
             return $this->container->get('view')->render($response, 'index.twig', [
                 'products' => $_SESSION['products'],
+                'confirmed' => $_SESSION['confirmed'],
                 'success_message' => $_SESSION['success_message'],
                 'email' => $_SESSION['email'] ?? null,
                 'logged' => $_SESSION['logged'],
@@ -230,8 +242,33 @@ final class ProductController
             return $response->withStatus(500);
         }
 
-        return $response->withStatus(201);
+    }
 
+    public function deleteProduct(Request $request, Response $response): Response{
+
+        try{
+
+            $data = $request->getParsedBody();
+
+            /** @var PDORepository $repository */
+            $repository = $this->container->get('user_repo');
+
+            $repository->deleteProduct($_SESSION['image']);
+
+            $_SESSION['success_message'] = 'Product Deleted!';
+
+            return $this->container->get('view')->render($response, 'index.twig', [
+                'products' => $_SESSION['products'],
+                'confirmed' => $_SESSION['confirmed'],
+                'success_message' => $_SESSION['success_message'],
+                'logged' => $_SESSION['logged'],
+            ]);
+
+
+        } catch (\Exception $e) {
+            $response->getBody()->write('Unexpected error: ' . $e->getMessage());
+        return $response->withStatus(500);
+        }
 
     }
 

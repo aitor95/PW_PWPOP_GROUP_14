@@ -323,10 +323,12 @@ hr{
 .cross:hover{
     cursor: pointer;
 }
+
 a {
     list-style: none;
     text-decoration: none;
 }
+
 .hack{
     margin-top: 1em !important;
 }
@@ -406,6 +408,7 @@ a {
 footer{
     position: fixed;
     bottom: 0;
+    left: 0;
     width: 100%;
     z-index: 1;
 }
@@ -427,3 +430,8 @@ footer{
     right: 46px !important;
     bottom: 120px !important;
 }
+
+footer > p{
+    display: inline-block;
+}
+

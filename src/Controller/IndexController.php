@@ -67,6 +67,7 @@ final class IndexController
             $_SESSION['products'] = $newArray;
             return $this->container->get('view')->render($response, 'index.twig', [
                 'products' => $_SESSION['products'],
+                'confirmed' => $_SESSION['confirmed'],
                 'success_message' => $_SESSION['success_message'] ?? null,
                 'logged' => $_SESSION['logged'] ?? null,
                 'email' => $_SESSION['email'] ?? null

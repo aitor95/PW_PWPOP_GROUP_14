@@ -10,7 +10,8 @@ use PwPop\Model\Database\PDORepository;
 use PwPop\Model\User;
 
 
-final class UserController{
+final class UserController
+{
 
     /** @var ContainerInterface */
     private $container;
@@ -35,7 +36,7 @@ final class UserController{
 
             //Controlamos si la imagen es correcta y que el usuario no este registrado (email o username)
             $registered = $repository->isRegistered($data['email'], $data['username']);
-            $name = (new FileController)->uploadAction($request,$response,$data['username']);
+            $name = (new FileController)->uploadAction($request, $response, $data['username']);
 
             $user = new User(
                 $data['email'],
@@ -47,15 +48,19 @@ final class UserController{
                 new DateTime(),
                 new DateTime(),
                 $name,
-                1
+                1,
+                0
             );
 
             if (!($name == '') && ($registered == 0)) {
 
                 //Si es correcta guardamos al usario en la database
-                $repository->save($user,$name);
+                $repository->save($user, $name);
+                //Enviamos el email de confirmación
+                (new MailerController())->confirmationMail($user);
 
                 return $this->container->get('view')->render($response, 'login.twig', [
+                    'confirmed' => $_SESSION['confirmed'],
                     'success' => 'Registration SUccess!',
                     'logged' => $_SESSION['logged'],
                 ]);
@@ -81,6 +86,7 @@ final class UserController{
 
                 return $this->container->get('view')->render($response, 'registre.twig', [
                     'errorEmail' => $errorEmail,
+                    'confirmed' => $_SESSION['confirmed'],
                     'errorUsername' => $errorUsername,
                     'errorImg' => $errorImg,
                     'logged' => $_SESSION['logged'],
@@ -93,42 +99,45 @@ final class UserController{
             return $response->withStatus(500);
         }
 
-        return $response->withStatus(201);
     }
 
     public function loginAction(Request $request, Response $response): Response
     {
-        try{
+        try {
 
-        $data = $request->getParsedBody();
+            $data = $request->getParsedBody();
 
-        /** @var PDORepository $repository */
-        $repository = $this->container->get('user_repo');
+            /** @var PDORepository $repository */
+            $repository = $this->container->get('user_repo');
 
 
-        if($repository->login($data['email'], $data['password'])){
+            if ($repository->login($data['email'], $data['password'])) {
 
-            $_SESSION['success_message'] = 'Login Success!';
-            $_SESSION['email'] = $data['email'];
-            $_SESSION['logged'] = true;
+                $_SESSION['success_message'] = 'Login Success!';
+                $_SESSION['email'] = $data['email'];
+                $_SESSION['logged'] = true;
+                $user=$repository->takeUser($data['email']);
+                $_SESSION['confirmed'] = $user->getConfirmed();
 
-            return $this->container->get('view')->render($response, 'index.twig', [
-                'products' => $_SESSION['products'],
-                'success_message' => 'Login Success!',
-                'logged' => $_SESSION['logged'],
-                'email' => $_SESSION['email']
-            ]);
+                return $this->container->get('view')->render($response, 'index.twig', [
+                    'confirmed' => $_SESSION['confirmed'],
+                    'products' => $_SESSION['products'],
+                    'success_message' => 'Login Success!',
+                    'logged' => $_SESSION['logged'],
+                    'email' => $_SESSION['email']
+                ]);
 
-        }else{
+            } else {
 
-            //No acierta usuario o contraseña
-            return $this->container->get('view')->render($response, 'login.twig', [
-                'error' => $_SESSION['error'],
-                'logged' => $_SESSION['logged'],
+                //No acierta usuario o contraseña
+                return $this->container->get('view')->render($response, 'login.twig', [
+                    'confirmed' => $_SESSION['confirmed'],
+                    'error' => $_SESSION['error'],
+                    'logged' => $_SESSION['logged'],
 
-            ]);
+                ]);
 
-        }
+            }
 
         } catch (\Exception $e) {
             $response->getBody()->write('Unexpected error: ' . $e->getMessage());
@@ -139,7 +148,7 @@ final class UserController{
 
     }
 
-    public function logOut (Request $request, Response $response): Response
+    public function logOut(Request $request, Response $response): Response
     {
 
         $_SESSION['logged'] = false;
@@ -147,6 +156,7 @@ final class UserController{
         $_SESSION['success_message'] = 'Logged Out, See you Soon!';
 
         return $this->container->get('view')->render($response, 'index.twig', [
+            'confirmed' => $_SESSION['confirmed'],
             'products' => $_SESSION['products'],
             'success_message' => $_SESSION['success_message'],
             'logged' => $_SESSION['logged'],
@@ -154,9 +164,10 @@ final class UserController{
 
     }
 
-    public function deleteAccount(Request $request, Response $response): Response{
+    public function deleteAccount(Request $request, Response $response): Response
+    {
 
-        try{
+        try {
 
             /** @var PDORepository $repository */
             $repository = $this->container->get('user_repo');
@@ -164,12 +175,11 @@ final class UserController{
             $useraux = $repository->takeUser($_SESSION['email']);
 
             $useraux->setIsActive(0);
-            //$useraux->setPassword(md5($useraux->getPassword()));
 
-            $repository->update($useraux,2);
+            $repository->update($useraux, 2);
             $repository->deleteProducts($useraux->getUsername());
 
-            $this->logOut($request,$response);
+            $this->logOut($request, $response);
 
         } catch (\Exception $e) {
             $response->getBody()->write('Unexpected error: ' . $e->getMessage());
@@ -180,6 +190,56 @@ final class UserController{
 
     }
 
+    public function confirmAccount(Request $request, Response $response): Response
+    {
+
+        try {
+
+            $username = $_REQUEST['username'];
+
+            $repository = $this->container->get('user_repo');
+
+            $repository->confirmAccount($username);
+
+            $this->logOut($request, $response);
+
+        } catch (\Exception $e) {
+
+            $response->getBody()->write('Unexpected error: ' . $e->getMessage());
+            return $response->withStatus(500);
+        }
+
+        return $response->withStatus(201);
+
+    }
+
+    public function resendConfirmation(Request $request, Response $response): Response
+    {
+
+        try {
+
+            /** @var PDORepository $repository */
+            $repository = $this->container->get('user_repo');
+            $user = $repository->takeUser($_SESSION['email']);
+
+            (new MailerController())->confirmationMail($user);
+
+            $_SESSION['success_message'] = 'Confirmation Email Sended!';
+
+            return $this->container->get('view')->render($response, 'index.twig', [
+                'confirmed' => $_SESSION['confirmed'],
+                'products' => $_SESSION['products'],
+                'success_message' => $_SESSION['success_message'],
+                'logged' => $_SESSION['logged'],
+            ]);
+
+
+        } catch (\Exception $e) {
+            $response->getBody()->write('Unexpected error: ' . $e->getMessage());
+            return $response->withStatus(500);
+        }
+
+    }
 }
 
 

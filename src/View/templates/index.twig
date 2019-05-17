@@ -16,8 +16,8 @@
                             </i>
                             PWPOP <span class="pwpop">| {{ email }}</span></a>
                         <ul id="nav-mobile" class="right hide-on-med-and-down">
-                            <li><a href="#modal1" data-target="modal1" class="modal-trigger"><i class="tiny material-icons">search</i></a></li>
                             {% if  logged  == true %}
+                                <li><a href="#modal1" data-target="modal1" class="modal-trigger"><i class="tiny material-icons">search</i></a></li>
                                 <li><a href="{{ base_url }}/profile"><i class="tiny material-icons">person</i></a></li>
                                 <li><a href="{{ base_url }}/logout" methods="post" ><i class="tiny material-icons">power_settings_new</i></a></li>
                             {% else %}
@@ -44,7 +44,7 @@
                                 <img src="{{ base_url}}/assets/img/Uploads/{{ product[5] }}">
                                 <span class="card-title">{{ product[2] }} </span>
                                 {% if  logged  == true %}
-                                    <a href="{{ base_url }}/buy" class="btn-floating halfway-fab waves-effect waves-light teal"><i
+                                    <a id="{{ product[5] }}" href="{{ base_url }}/buy?image={{ product[5] }}" methods="get" class="btn-floating halfway-fab waves-effect waves-light teal"><i
                                                 class="tiny material-icons">attach_money</i></a>
 
                                     <a id="{{ product[5] }}" href="{{ base_url }}/product?image={{ product[5] }}" methods="post" class="btn-floating halfway-fab waves-effect heart-hack waves-light teal"><i
@@ -71,6 +71,9 @@
         </div>
         <footer class="section teal darken-2 white-text center">
             <p>PWPOP &copy; 2019 </p>
+            {% if confirmed==0 and logged==true%}
+                <a class="btn-floating pulse yellow darken-3" href="{{ base_url }}/resend"><i class="material-icons">warning</i></a>
+            {% endif %}
         </footer>
 
     {% endblock %}

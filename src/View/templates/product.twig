@@ -123,6 +123,7 @@
                                 </div>
 
                                 <button id="upload" class="waves-effect waves-light btn-large hack" type="submit" formaction="{{ base_url }}/updateProduct" formmethod="post" value="upload">Upload </button>
+                                <div class="waves-effect waves-light btn-large hack red darken-1" onclick="deleteProduct()" >Delete<a></a></div>
 
                             </form>
                         </div>
@@ -235,11 +236,13 @@
 
         <footer class="section teal darken-2 white-text center">
             <p>PWPOP &copy; 2019 </p>
+            {% if confirmed==0 and logged==true%}
+                <a class="btn-floating pulse yellow darken-3" href="{{ base_url }}/resend"><i class="material-icons">warning</i></a>
+            {% endif %}
         </footer>
 
     {% endblock %}
 
     {% block scripts %}
         {{ parent() }}
-        <script src="{{ base_url }}/assets/js/update.js"></script>
     {% endblock %}

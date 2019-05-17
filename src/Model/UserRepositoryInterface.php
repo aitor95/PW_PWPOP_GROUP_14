@@ -20,4 +20,12 @@ interface UserRepositoryInterface{
     public function deleteProducts(string $username);
 
     public function updateProduct(Product $product, int $id);
+
+    public function deleteProduct(string $img);
+
+    public function takeEmail(string $username):User;
+
+    public function soldOutProduct(string $img);
+
+    public function confirmAccount(string $username);
 }

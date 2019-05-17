@@ -124,7 +124,8 @@ final class PDORepository implements UserRepositoryInterface{
             $datetime,
             $datetime2,
             $data['profileImg'],
-            $data['is_active']
+            $data['is_active'],
+            $data['confirmed']
         );
 
         return $user;
@@ -221,4 +222,66 @@ final class PDORepository implements UserRepositoryInterface{
         $statement->execute();
 
     }
+
+    public function deleteProduct(string $img){
+
+        $query = "UPDATE product SET is_active=0 WHERE productImg=\"" . $img . "\"";
+
+        $statement = $this->database->connection->prepare($query);
+
+        $statement->execute();
+
+    }
+
+    public function takeEmail(string $username):User{
+
+        $query = "SELECT * FROM user WHERE username=\"" . $username . "\"";
+        $stmt = $this->database->connection->prepare($query);
+        $stmt->execute();
+        $data = $stmt->fetch();
+
+        $datetime = new DateTime();
+        $newDate = $datetime->createFromFormat('Y/M/D H:i:s', $data['created_at']);
+
+        $datetime2 = new DateTime();
+        $newDate2 = $datetime2->createFromFormat('Y/M/D H:i:s', $data['updated_at']);
+
+        $user = new User(
+            $data['email'],
+            $data['password'],
+            $data['birth_date'],
+            $data['name'],
+            $data['username'],
+            $data['phone'],
+            $datetime,
+            $datetime2,
+            $data['profileImg'],
+            $data['is_active'],
+            $data['confirmed']
+        );
+
+        return $user;
+
+    }
+
+    public function soldOutProduct(string $img){
+
+        $query = "UPDATE product SET soldout=1 WHERE productImg=\"" . $img . "\"";
+
+        $statement = $this->database->connection->prepare($query);
+
+        $statement->execute();
+
+    }
+
+    public function confirmAccount(string $username){
+
+        $query = "UPDATE user SET confirmed=1 WHERE username=\"" . $username . "\"";
+
+        $statement = $this->database->connection->prepare($query);
+
+        $statement->execute();
+
+    }
+
 }

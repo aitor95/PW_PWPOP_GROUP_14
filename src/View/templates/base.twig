@@ -19,11 +19,11 @@
                 <form class="col s12">
                     <div class="row modal-form-row">
                         <div class="input-field col s6">
-                            <input id="image_title" type="text">
+                            <input id="image_title" name="image_title" type="text">
                             <label for="image_title">Title</label>
                         </div>
                         <div class="input-field col s6">
-                            <select class="selector">
+                            <select class="selector" id="category2" name="category2">
                                 <option value="" disabled selected>Choose your option</option>
                                 <option value="1">Computers and electronic</option>
                                 <option value="2">Cars</option>
@@ -36,24 +36,23 @@
                             <label>Category</label>
                         </div>
                         <div class="input-field col s6">
-                            <input id="min_price" type="text">
+                            <input id="min_price" name="min_price" type="text">
                             <label for="min_price">Min Price</label>
                         </div>
                         <div class="input-field col s6">
-                            <input id="max_price" type="text">
+                            <input id="max_price" name="max_price" type="text">
                             <label for="max_price">Max Price</label>
                         </div>
                     </div>
 
-
+                    <div class="modal-footer">
+                        <button class="btn waves-effect waves-light btn-search" type="submit" name="action" formaction="{{ base_url }}/search" formmethod="post" value="upload">Submit
+                            <i class="material-icons right">send</i>
+                        </button>
+                    </div>
 
                 </form>
             </div>
-        </div>
-        <div class="modal-footer">
-            <button class="btn waves-effect waves-light btn-search" type="submit" name="action">Submit
-                <i class="material-icons right">send</i>
-            </button>
         </div>
     </div>
 {% endblock %}
