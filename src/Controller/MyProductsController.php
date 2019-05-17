@@ -36,13 +36,15 @@ final class MyProductsController
             //Agafem el usuari per gestionar que no mostri els seus productes
             $user = $repository->takeUser($_SESSION['email']);
             $i = 0;
+            $j = 0;
             $newArray=[];
 
-            while($i<5 && sizeof($products) > $i){
-                if($products[$i][1] == $user->getUsername()){
-                    array_push($newArray, $products[$i]);
+            while(($i<5) && (sizeof($products) > $j)){
+                if($products[$j][1] == $user->getUsername()){
+                    array_push($newArray, $products[$j]);
+                    $i++;
                 }
-                $i++;
+                $j++;
             }
 
             if($newArray == null){

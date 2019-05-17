@@ -174,8 +174,8 @@ final class PDORepository implements UserRepositoryInterface{
     public function saveProduct(Product $product) {
 
         $statement = $this->database->connection->prepare(
-            "INSERT INTO product(id,username, title, description, price, productImg, category) 
-                        values(:id, :username, :title, :description, :price, :productImg, :category)");
+            "INSERT INTO product(id,username, title, description, price, productImg, category,is_active) 
+                        values(:id, :username, :title, :description, :price, :productImg, :category, 1)");
 
         $id = $product->getId();
         $username = $product->getUsername();
