@@ -363,19 +363,12 @@ a {
     font-weight: 300;
 }
 .section-search input{
-    /* padding: 5px !important; */
     font-size: 18px !important;
     width: 90% !important;
     border: #f4f4f4 3px solid !important;
     margin-right: 0;
 }
 
-.btn-search{
-    height: 50px !important;
-    width: 120px !important;
-    margin-left: -30px !important;
-    margin-top: 14px !important;
-}
 .tiny{
     font-size: 1.3em !important;
 }
@@ -386,6 +379,9 @@ a {
     right: 80px !important;
 }
 
+.heart-hack2{
+    right: 137px !important;
+}
 .product-info{
     width: 50%;
     position: absolute;
@@ -426,4 +422,8 @@ footer{
 .card-title{
     background-color: rgba(0,0,0, .3);
     width: 100%;
+}
+.fixed-action-btn{
+    right: 46px !important;
+    bottom: 120px !important;
 }

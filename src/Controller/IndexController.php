@@ -44,7 +44,8 @@ final class IndexController
                 $newArray=[];
 
                 while(($i<5) && (sizeof($products) > $j)){
-                    if($products[$j][1] != $user->getUsername() && $products[$j][7] == 1){
+                    //Controlar que el is_active sea igual a 1 y que el soldout sea igual a 0
+                    if($products[$j][1] != $user->getUsername() && $products[$j][7] == 1 && $products[$j][8] == 0){
                         array_push($newArray, $products[$j]);
                         $i++;
                     }

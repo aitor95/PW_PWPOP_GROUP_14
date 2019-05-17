@@ -9,11 +9,77 @@
 </head>
 <body>
 
+{% block modal %}
+    <!-- Modal Structure -->
+    <div id="modal1" class="modal">
+        <div class="modal-content">
+            <h4>Search a product</h4>
+
+            <div class="row">
+                <form class="col s12">
+                    <div class="row modal-form-row">
+                        <div class="input-field col s6">
+                            <input id="image_title" type="text">
+                            <label for="image_title">Title</label>
+                        </div>
+                        <div class="input-field col s6">
+                            <select class="selector">
+                                <option value="" disabled selected>Choose your option</option>
+                                <option value="1">Computers and electronic</option>
+                                <option value="2">Cars</option>
+                                <option value="3">Sports</option>
+                                <option value="4">Games</option>
+                                <option value="5">Fashion</option>
+                                <option value="6">Home</option>
+                                <option value="7">Other</option>
+                            </select>
+                            <label>Category</label>
+                        </div>
+                        <div class="input-field col s6">
+                            <input id="min_price" type="text">
+                            <label for="min_price">Min Price</label>
+                        </div>
+                        <div class="input-field col s6">
+                            <input id="max_price" type="text">
+                            <label for="max_price">Max Price</label>
+                        </div>
+                    </div>
+
+
+
+                </form>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn waves-effect waves-light btn-search" type="submit" name="action">Submit
+                <i class="material-icons right">send</i>
+            </button>
+        </div>
+    </div>
+{% endblock %}
 {% block body %}{% endblock %}
+{% block float %}
+    {% if  logged  == true %}
+    <div class="fixed-action-btn">
+        <a class="btn-floating btn-large blue">
+            <i class="large material-icons">add</i>
+        </a>
+        <ul>
+
+            <li><a class="btn-floating green tooltipped" data-position="left" data-tooltip="Favourite Products"><i class="material-icons">star</i></a></li>
+            <li><a  class="btn-floating yellow darken-1 tooltipped" data-position="left" data-tooltip="My Products" href="{{ base_url }}/myproducts"> <i class="tiny material-icons">bookmark</i></a></li>
+            <li><a class="btn-floating red tooltipped" data-position="left" data-tooltip="Upload Product" href="{{ base_url }}/upload"> <i class="tiny material-icons">playlist_add</i></a></li>
+
+        </ul>
+    </div>
+    {% endif %}
+{% endblock %}
 <!-- Compiled and minified JavaScript -->
 {% block scripts %}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script src="{{ base_url }}/assets/js/script.js"></script>
+
 {% endblock %}
 
 </body>

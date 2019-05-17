@@ -13,32 +13,23 @@
                                             transform="translate(-2 -2)" fill="white" /></svg></i>PWPOP <span class="pwpop">| {{ email }}</span></a>
                         <span class="page">Upload</span>
                         <ul id="nav-mobile" class="right hide-on-med-and-down">
-                            <li><a href="{{ base_url }}/search"><i class="tiny material-icons">search</i></a></li>
+                            <li><a href="#modal1" data-target="modal1" class="modal-trigger"><i class="tiny material-icons">search</i></a></li>
                             {% if  logged  == true %}
                                 <li><a href="{{ base_url }}/profile"><i class="tiny material-icons">person</i></a></li>
-                                <li><a href="{{ base_url }}/upload"> <i class="tiny material-icons">playlist_add</i></a></li>
-                                <li><a href="{{ base_url }}/myproducts"> <i class="tiny material-icons">bookmark</i></a></li>
                                 <li><a href="{{ base_url }}/logout" methods="post" ><i class="tiny material-icons">power_settings_new</i></a></li>
-
                             {% else %}
-                                <li><a href="{{ base_url }}/403">Profile</a></li>
+                                <li><a href="{{ base_url }}/403"><i class="tiny material-icons">person</i></a></li>
                                 <li><a href="{{ base_url }}/login">Sign In</a></li>
                                 <li><a href="{{ base_url }}/registre">Sign Up</a></li>
                             {% endif %}
                         </ul>
-                        <a href="#" data-target="mobile-nav" class="sidenav-trigger"><i class="material-icons">menu</i></a>
 
 
                     </div>
                 </div>
             </nav>
         </div>
-        <ul class="sidenav" id="mobile-nav">
 
-            <li><a href="{{ base_url }}/login">Sign In</a></li>
-            <li><a href="{{ base_url }}/registre">Sign Up</a></li>
-
-        </ul>
         <div class="wrapper-profile">
             <div class="right-grid">
                 <div class="profile_info-2">

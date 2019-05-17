@@ -205,4 +205,20 @@ final class PDORepository implements UserRepositoryInterface{
         $statement->execute();
 
     }
+
+    public function updateProduct(Product $product, int $id){
+
+        $title = $product->getTitle();
+        $description = $product->getDescription();
+        $price= $product->getPrice();
+        $category = $product->getCategory();
+
+        $query = "UPDATE product SET title=\"" . $title . "\", description=\"" . $description . "\", price=\"" . $price . "\", 
+        category=\"" . $category . "\" WHERE id=\"" . $id . "\"";
+
+        $statement = $this->database->connection->prepare($query);
+
+        $statement->execute();
+
+    }
 }

@@ -27,6 +27,7 @@ $app->get('/registre', function (Request $request, Response $response, array $ar
 $app->get('/search', function (Request $request, Response $response, array $args) {
     return $this->view->render($response, 'search.twig', [
         'logged' => $_SESSION['logged'] ?? null,
+        'email' => $_SESSION['email'] ?? null,
     ]);
 });
 
@@ -56,7 +57,11 @@ $app->post('/modify',ProfileController::class . ':modifyAction');
 
 $app->post('/user',UserController::class . ':loginAction');
 
-$app->post('/uploadProduct', ProductController::class . ':uploadAction');
+$app->post('/uploadProduct', ProductController::class . ':saveProductAction');
+
+$app->post('/updateProduct', ProductController::class . ':updateAction');
+
+$app->get('/buy', ProductController::class . ':buyProduct');
 
 $app->get('/', IndexController::class.':productsUpdate');
 

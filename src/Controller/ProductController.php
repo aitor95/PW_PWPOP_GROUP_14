@@ -27,7 +27,7 @@ final class ProductController
         $this->container = $container;
     }
 
-    public function uploadAction(Request $request, Response $response): Response{
+    public function saveProductAction(Request $request, Response $response): Response{
 
         try{
 
@@ -41,6 +41,10 @@ final class ProductController
             $id = sizeof($products) + 1;
 
             $name = (new FileController)->uploadProductAction($request,$response,$user->getUsername().$id);
+            //Cas en el que estem actualitzant el producte i no creantlo
+            if($name==null){
+                $name=$_SESSION['productInfo'];
+            }
 
             $product = new Product(
                 $id,
@@ -62,6 +66,7 @@ final class ProductController
                 return $this->container->get('view')->render($response, 'index.twig', [
                     'products' => $_SESSION['products'],
                     'success_message' => $_SESSION['success_message'],
+                    'email' => $_SESSION['email'] ?? null,
                     'logged' => $_SESSION['logged'],
                 ]);
 
@@ -92,8 +97,20 @@ final class ProductController
         if($_SESSION['image'] == null){
 
             $_SESSION['image'] = $_REQUEST['image'];
-            header('Location: /product');
-            exit;
+            $_SESSION['productInfo'] = $_SESSION['image'];
+
+            //Si esta accediendo de manera manual al producto
+            if($_SESSION['productInfo'] == null){
+
+                header('Location: /404');
+                exit;
+
+            }else{
+
+                header('Location: /product');
+                exit;
+
+            }
 
         }else{
 
@@ -129,6 +146,92 @@ final class ProductController
 
             ]);
         }
+
+    }
+
+
+    public function updateAction(Request $request, Response $response): Response{
+
+        try{
+
+            $data = $request->getParsedBody();
+
+            /** @var PDORepository $repository */
+            $repository = $this->container->get('user_repo');
+
+            $user = $repository->takeUser($_SESSION['email']);
+            $products=$repository->takeProducts();
+            $id=0;
+            $name=$_SESSION['productInfo'];
+            for($i=0; $i<sizeof($products);$i++){
+                if($products[$i][5] == $name){
+                    $id=$i+1;
+                }
+            }
+
+            $product = new Product(
+                $id,
+                $user->getUsername(),
+                $data['title'],
+                $data['description'],
+                $data['price'],
+                $data['category'],
+                $name
+            );
+
+            //Si es correcta guardamos al usario en la database
+            $repository->updateProduct($product, $id);
+            $_SESSION['success_message'] = 'Product Updated!';
+
+            return $this->container->get('view')->render($response, 'index.twig', [
+                'products' => $_SESSION['products'],
+                'success_message' => $_SESSION['success_message'],
+                'email' => $_SESSION['email'] ?? null,
+                'logged' => $_SESSION['logged'],
+            ]);
+
+
+        } catch (\Exception $e) {
+            $response->getBody()->write('Unexpected error: ' . $e->getMessage());
+            return $response->withStatus(500);
+        }
+
+        return $response->withStatus(201);
+
+    }
+
+
+    public function buyProduct(Request $request, Response $response): Response{
+
+        try{
+
+            $data = $request->getParsedBody();
+
+            /** @var PDORepository $repository */
+            $repository = $this->container->get('user_repo');
+
+            //repository soldout product
+
+            //Enviar correo con info (Coger email del vendedor, y enviar usuario y mobil del comprador)
+
+
+            $_SESSION['success_message'] = 'Product Buyed!';
+
+            return $this->container->get('view')->render($response, 'index.twig', [
+                'products' => $_SESSION['products'],
+                'success_message' => $_SESSION['success_message'],
+                'email' => $_SESSION['email'] ?? null,
+                'logged' => $_SESSION['logged'],
+            ]);
+
+
+        } catch (\Exception $e) {
+            $response->getBody()->write('Unexpected error: ' . $e->getMessage());
+            return $response->withStatus(500);
+        }
+
+        return $response->withStatus(201);
+
 
     }
 

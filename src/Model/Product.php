@@ -21,7 +21,7 @@ final class Product{
     /** @var int */
     private $price;
 
-    /** @var DateTime */
+    /** @var int */
     private $category;
 
     /** @var string */

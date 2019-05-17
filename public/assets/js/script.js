@@ -6,14 +6,6 @@ M.Datepicker.init(Calendar, {
 const sideNav = document.querySelector('.sidenav');
 M.Sidenav.init(sideNav, {});
 
-var Slider = document.querySelector('.slider');
-M.Slider.init(Slider, {
-    height: 300,
-    transition: 500,
-    indicators: true,
-    interval: 6000
-});
-
 var Selector = document.querySelector('.selector');
 M.FormSelect.init(Selector, {});
 
@@ -31,7 +23,14 @@ M.Autocomplete.init(Autocomplete, {
     }
 });
 
+var Modal = document.querySelector('.modal');
+M.Modal.init(Modal, {});
 
+var Float = document.querySelector('.fixed-action-btn');
+M.FloatingActionButton.init(Float, {});
+
+var Tooltip = document.querySelectorAll('.tooltipped');
+M.Tooltip.init(Tooltip, {});
 
 function validaFormulario(event){
 
@@ -150,4 +149,3 @@ function myFunction() {
       }
   }
 }
-

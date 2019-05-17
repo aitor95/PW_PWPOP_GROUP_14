@@ -18,4 +18,6 @@ interface UserRepositoryInterface{
     public function saveProduct(Product $product);
 
     public function deleteProducts(string $username);
+
+    public function updateProduct(Product $product, int $id);
 }
