@@ -28,6 +28,8 @@ final class MyProductsController
     {
         try {
 
+            $_SESSION['image'] = null;
+
             /** @var PDORepository $repository */
             $repository = $this->container->get('user_repo');
 
@@ -59,6 +61,7 @@ final class MyProductsController
                 'products' => $_SESSION['my_products'],
                 'success_message' => $_SESSION['success_message'] ?? null,
                 'logged' => $_SESSION['logged'] ?? null,
+                'email' => $_SESSION['email'] ?? null
             ]);
 
         } catch

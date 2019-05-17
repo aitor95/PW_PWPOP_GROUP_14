@@ -28,6 +28,8 @@ final class IndexController
     {
         try {
 
+            $_SESSION['image'] = null;
+
             /** @var PDORepository $repository */
             $repository = $this->container->get('user_repo');
 
@@ -66,6 +68,7 @@ final class IndexController
                 'products' => $_SESSION['products'],
                 'success_message' => $_SESSION['success_message'] ?? null,
                 'logged' => $_SESSION['logged'] ?? null,
+                'email' => $_SESSION['email'] ?? null
             ]);
 
         } catch

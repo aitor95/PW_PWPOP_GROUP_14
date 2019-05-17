@@ -86,4 +86,50 @@ final class ProductController
 
     }
 
+
+    public function loadProductInfo(Request $request, Response $response): Response{
+
+        if($_SESSION['image'] == null){
+
+            $_SESSION['image'] = $_REQUEST['image'];
+            header('Location: /product');
+            exit;
+
+        }else{
+
+            /** @var PDORepository $repository */
+            $repository = $this->container->get('user_repo');
+
+            $products=$repository->takeProducts();
+
+            foreach($products as $product){
+                if($product[5] == $_SESSION['image']){
+                    $my_product = $product;
+                }
+            }
+
+            //Find if it's owner or buyer
+            $user = $repository->takeUser($_SESSION['email']);
+            $owner = false;
+            if($my_product[1] == $user->getUsername()){
+                $owner = true;
+            }
+
+
+            return $this->container->get('view')->render($response, 'product.twig', [
+                'success_message' => $_SESSION['success_message'] ?? null,
+                'email' => $_SESSION['email'] ?? null,
+                'logged' => $_SESSION['logged'] ?? null,
+                'title' => $my_product[2],
+                'description' => $my_product[3],
+                'price' => $my_product[4],
+                'productImg' => $my_product[5],
+                'category' => $my_product[6],
+                'owner' => $owner
+
+            ]);
+        }
+
+    }
+
 }

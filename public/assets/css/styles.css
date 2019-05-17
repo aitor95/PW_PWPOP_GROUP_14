@@ -257,6 +257,16 @@ hr{
     font-size: 1.5em;
 }
 
+.page{
+    margin-left: 50%;
+    transform: translateX(-50%);
+    display: inline-block;
+
+}
+
+.margin{
+    margin-top: 50px;
+}
 .nickname{
     color: #000000;
     font-size: 1.2em;
@@ -407,4 +417,13 @@ footer{
 .card-title{
     color: black;
     text-emphasis-color: black;
+}
+
+.pwpop{
+    font-size: 0.8em;
+    color: rgba(255,255,255,.5);
+}
+.card-title{
+    background-color: rgba(0,0,0, .3);
+    width: 100%;
 }

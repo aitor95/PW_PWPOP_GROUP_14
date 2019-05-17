@@ -116,6 +116,7 @@ final class UserController{
                 'products' => $_SESSION['products'],
                 'success_message' => 'Login Success!',
                 'logged' => $_SESSION['logged'],
+                'email' => $_SESSION['email']
             ]);
 
         }else{
@@ -124,6 +125,7 @@ final class UserController{
             return $this->container->get('view')->render($response, 'login.twig', [
                 'error' => $_SESSION['error'],
                 'logged' => $_SESSION['logged'],
+
             ]);
 
         }

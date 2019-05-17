@@ -144,7 +144,7 @@ function myFunction() {
           message_confirm.innerHTML = "";
       }
   }
-  if(devolver ==true){
+  if(devolver){
       if (confirm("Are you sure you want to delete the account?")) {
         window.location.href = "/deleteAcc";
       }
