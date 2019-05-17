@@ -38,7 +38,7 @@ final class MyProductsController
             $i = 0;
             $newArray=[];
 
-            while($i<5 && $products[$i] != null){
+            while($i<5 && sizeof($products) > $i){
                 if($products[$i][1] == $user->getUsername()){
                     array_push($newArray, $products[$i]);
                 }

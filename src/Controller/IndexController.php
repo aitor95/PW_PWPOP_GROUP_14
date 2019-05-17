@@ -40,7 +40,7 @@ final class IndexController
                 $i = 0;
                 $newArray=[];
 
-                while($i<5 && $products[$i] != null){
+                while($i<5 && sizeof($products) > $i){
                     if($products[$i][1] != $user->getUsername() && $products[$i][7] == 1){
                         array_push($newArray, $products[$i]);
                     }

@@ -16,7 +16,7 @@
                             {% if  logged  == true %}
                                 <li><a href="{{ base_url }}/profile"><i class="tiny material-icons">person</i></a></li>
                                 <li><a href="{{ base_url }}/upload"> <i class="tiny material-icons">playlist_add</i></a></li>
-                                <li><a href="{{ base_url }}/product"> <i class="tiny material-icons">bookmark</i></a></li>
+                                <li><a href="{{ base_url }}/myproducts"> <i class="tiny material-icons">bookmark</i></a></li>
                                 <li><a href="{{ base_url }}/logout" methods="post" ><i class="tiny material-icons">power_settings_new</i></a></li>
                             {% else %}
                                 <li><a href="{{ base_url }}/403"><i class="tiny material-icons">person</i></a></li>
@@ -31,8 +31,8 @@
             </nav>
         </div>
         <ul class="sidenav" id="mobile-nav">
-                <li><a href="{{ base_url }}/login">Sign In</a></li>
-                <li><a href="{{ base_url }}/registre">Sign Up</a></li>
+            <li><a href="{{ base_url }}/login">Sign In</a></li>
+            <li><a href="{{ base_url }}/registre">Sign Up</a></li>
         </ul>
         {% if  success_message != null %}
             <p class="success">{{ success_message }}</p>
@@ -45,9 +45,13 @@
                         <div class="card">
                             <div class="card-image">
                                 <img src="{{ base_url}}/assets/img/Uploads/{{ product[5] }}">
-                                <span class="card-title">{{ product[2] }}</span>
-                                <a class="btn-floating halfway-fab waves-effect waves-light teal"><i
+                                <span class="card-title">{{ product[2] }} </span>
+                                <a href="{{ base_url }}/buy" class="btn-floating halfway-fab waves-effect waves-light teal"><i
                                             class="tiny material-icons">attach_money</i></a>
+
+                                <a href="{{ base_url }}/product" class="btn-floating halfway-fab waves-effect heart-hack waves-light teal"><i
+                                            class="tiny material-icons">remove_red_eye</i></a>
+
                             </div>
                             <div class="card-content">
                                 <p>{{ product[3] }}</p>
