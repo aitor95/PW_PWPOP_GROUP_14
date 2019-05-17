@@ -114,3 +114,40 @@ function validaFormulario(event){
 }
 
 document.getElementById("formulario").addEventListener('submit', validaFormulario);
+
+
+function myFunction() {
+
+  devolver = true;
+  var password = document.getElementById("password").value;
+  var message_password = document.getElementById("message-password");
+  if (password.length <6){
+      message_password.innerHTML = "Minimum 6 characters";
+      message_password.classList.add("error");
+      devolver = false;
+  } else {
+      message_password.innerHTML = "";
+  }
+
+  var confirmpassword = document.getElementById("confirm-password").value;
+  var message_confirm = document.getElementById("message-confirm-password");
+  if (confirmpassword.length < 6 ) {
+      message_confirm.innerText = "Minimum 6 characters";
+      message_confirm.classList.add("error");
+      devolver = false;
+  } else {
+      if (confirmpassword !== password){
+          message_confirm.innerHTML = "Passwords must match";
+          message_confirm.classList.add("error");
+          devolver = false;
+      } else {
+          message_confirm.innerHTML = "";
+      }
+  }
+  if(devolver ==true){
+      if (confirm("Are you sure you want to delete the account?")) {
+        window.location.href = "/deleteAcc";
+      }
+  }
+}
+

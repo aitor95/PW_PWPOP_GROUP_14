@@ -60,11 +60,22 @@ final class PDORepository implements UserRepositoryInterface{
         $data = $info->fetchAll();
 
         $registered = false;
+        $deletedAcc = false;
         $passwordcrypted = md5($password);
+
         for ($i=0; $i < sizeof($data) ; $i++) {
             if($email == $data[$i]['email'] && $passwordcrypted == $data[$i]['password']){
                 $registered = true;
+                if($data[$i]['is_active'] == 0){
+                    $deletedAcc = true;
+                    $registered = false;
+                    $_SESSION['error'] = 'Account Deleted!';
+                }
             }
+        }
+
+        if($registered==false && $deletedAcc == false){
+            $_SESSION['error'] = 'User or Email Invalid!';
         }
 
         return $registered;
@@ -112,26 +123,32 @@ final class PDORepository implements UserRepositoryInterface{
             $data['phone'],
             $datetime,
             $datetime2,
-            $data['profileImg']
+            $data['profileImg'],
+            $data['is_active']
         );
 
         return $user;
     }
 
-    public function update(User $user){
+    public function update(User $user, int $mode){
 
         $email = $user->getEmail();
         $username = $user->getUsername();
-        $password = $user->getPassword();
+        $password= $user->getPassword();
         $passcrypted = md5($password);
+        if($mode==2){
+            $passcrypted = $password;
+        }
         $birth_date = $user->getBirthDate();
         $name = $user->getName();
         $phone = $user->getPhone();
         $updatedAt = $user->getUpdatedAt()->format('Y-m-d H:i:s');
         $profileImg = $user->getProfileImg();
+        $is_active = $user->getisActive();
 
-        $query = "UPDATE user SET email=\"" . $email . "\", password=\"" . $passcrypted . "\", birth_date=\"" . $birth_date . "\", name=\"" . $name . "\", phone=\"" . $phone . "\", profileImg =\"" . $profileImg . "\", updated_at=\"" . $updatedAt . "\"
-        WHERE username=\"" . $username . "\"";
+        $query = "UPDATE user SET email=\"" . $email . "\", password=\"" . $passcrypted . "\", birth_date=\"" . $birth_date . "\", 
+        name=\"" . $name . "\", phone=\"" . $phone . "\", profileImg =\"" . $profileImg . "\", updated_at=\"" . $updatedAt . "\",  
+        is_active =\"" . $is_active . "\" WHERE username=\"" . $username . "\"";
 
         $statement = $this->database->connection->prepare($query);
 
@@ -177,5 +194,15 @@ final class PDORepository implements UserRepositoryInterface{
         $statement->bindParam('category', $category, PDO::PARAM_STR);
 
         $statement->execute();
+    }
+
+    public function deleteProducts(string $username){
+
+        $query = "UPDATE product SET is_active=0 WHERE username=\"" . $username . "\"";
+
+        $statement = $this->database->connection->prepare($query);
+
+        $statement->execute();
+
     }
 }

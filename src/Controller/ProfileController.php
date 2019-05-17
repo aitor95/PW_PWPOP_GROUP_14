@@ -82,13 +82,14 @@ final class ProfileController{
                 $data['phone'],
                 new DateTime(),
                 new DateTime(),
-                $name
+                $name,
+                1
             );
 
             //Controlem si el email esta ja agafat o no (potser que sigui jo el que tinc el email, llavors deixem actualitzar)
             if (($registered == 4) && ($useraux2->getUsername() == $useraux->getUsername())) {
 
-                $repository->update($user);
+                $repository->update($user,0);
                 $_SESSION['email'] = $data['email'];
                 $_SESSION['success_message'] = 'Data Actualized!';
 

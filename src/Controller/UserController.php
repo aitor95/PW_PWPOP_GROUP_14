@@ -46,7 +46,8 @@ final class UserController{
                 $data['phone'],
                 new DateTime(),
                 new DateTime(),
-                $name
+                $name,
+                1
             );
 
             if (!($name == '') && ($registered == 0)) {
@@ -112,6 +113,7 @@ final class UserController{
             $_SESSION['logged'] = true;
 
             return $this->container->get('view')->render($response, 'index.twig', [
+                'products' => $_SESSION['products'],
                 'success_message' => 'Login Success!',
                 'logged' => $_SESSION['logged'],
             ]);
@@ -120,7 +122,7 @@ final class UserController{
 
             //No acierta usuario o contraseña
             return $this->container->get('view')->render($response, 'login.twig', [
-                'error' => 'Username or Email invalid!',
+                'error' => $_SESSION['error'],
                 'logged' => $_SESSION['logged'],
             ]);
 
@@ -143,9 +145,36 @@ final class UserController{
         $_SESSION['success_message'] = 'Logged Out, See you Soon!';
 
         return $this->container->get('view')->render($response, 'index.twig', [
+            'products' => $_SESSION['products'],
             'success_message' => $_SESSION['success_message'],
             'logged' => $_SESSION['logged'],
         ]);
+
+    }
+
+    public function deleteAccount(Request $request, Response $response): Response{
+
+        try{
+
+            /** @var PDORepository $repository */
+            $repository = $this->container->get('user_repo');
+
+            $useraux = $repository->takeUser($_SESSION['email']);
+
+            $useraux->setIsActive(0);
+            //$useraux->setPassword(md5($useraux->getPassword()));
+
+            $repository->update($useraux,2);
+            $repository->deleteProducts($useraux->getUsername());
+
+            $this->logOut($request,$response);
+
+        } catch (\Exception $e) {
+            $response->getBody()->write('Unexpected error: ' . $e->getMessage());
+            return $response->withStatus(500);
+        }
+
+        return $response->withStatus(201);
 
     }
 

@@ -36,6 +36,9 @@ final class User{
     /** @var string */
     private $profileImg;
 
+    /** @var int */
+    private $isActive;
+
 
     /**
      * User constructor.
@@ -47,7 +50,7 @@ final class User{
      * @param DateTime $createdAt
      * @param DateTime $updatedAt
      */
-    public function __construct(string $email, string $password, string $birthDate,string $name , string $username, int $phone, DateTime $createdAt, DateTime $updatedAt, string $profileImg) {
+    public function __construct(string $email, string $password, string $birthDate,string $name , string $username, int $phone, DateTime $createdAt, DateTime $updatedAt, string $profileImg, int $isActive) {
 
         $this->email = $email;
         $this->password = $password;
@@ -58,6 +61,7 @@ final class User{
         $this->createdAt = $createdAt;
         $this->updatedAt = $updatedAt;
         $this->profileImg = $profileImg;
+        $this->isActive = $isActive;
 
     }
 
@@ -219,6 +223,22 @@ final class User{
     public function setProfileImg($profileImg)
     {
         $this->profileImg = $profileImg;
+    }
+
+    /**
+     * @return int
+     */
+    public function getisActive(): int
+    {
+        return $this->isActive;
+    }
+
+    /**
+     * @param int $isActive
+     */
+    public function setIsActive(int $isActive): void
+    {
+        $this->isActive = $isActive;
     }
 
 

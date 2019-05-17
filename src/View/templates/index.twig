@@ -40,21 +40,20 @@
 
         <div class="container container-margin">
             <div class="row">
-                {% for i in 0..4 %}
+                {% for product in products %}
                     <div class="col s4">
                         <div class="card">
                             <div class="card-image">
-                                <img src="https://materializecss.com/images/sample-1.jpg">
-                                <span class="card-title">Card Title {{ i }}</span>
+                                <img src="{{ base_url}}/assets/img/Uploads/{{ product[5] }}">
+                                <span class="card-title">{{ product[2] }}</span>
                                 <a class="btn-floating halfway-fab waves-effect waves-light teal"><i
                                             class="tiny material-icons">attach_money</i></a>
                             </div>
                             <div class="card-content">
-                                <p>I am a very simple card. I am good at containing small bits of information. I am convenient
-                                    because I require little markup to use effectively.</p>
+                                <p>{{ product[3] }}</p>
                                 <div class="price-content">
                                     <span>$</span>
-                                    <p class="price">17</p>
+                                    <p class="price">{{ product[4] }}</p>
                                 </div>
                             </div>
                         </div>

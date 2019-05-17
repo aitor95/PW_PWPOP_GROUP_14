@@ -60,6 +60,7 @@ final class ProductController
                 $_SESSION['success_message'] = 'Product Uploaded!';
 
                 return $this->container->get('view')->render($response, 'index.twig', [
+                    'products' => $_SESSION['products'],
                     'success_message' => $_SESSION['success_message'],
                     'logged' => $_SESSION['logged'],
                 ]);

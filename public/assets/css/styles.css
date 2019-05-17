@@ -403,3 +403,8 @@ footer{
     width: 100%;
     z-index: 1;
 }
+
+.card-title{
+    color: black;
+    text-emphasis-color: black;
+}

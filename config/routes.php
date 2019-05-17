@@ -6,6 +6,8 @@ use PwPop\Controller\UserController;
 use PwPop\Controller\Middleware\SessionMiddleware;
 use PwPop\Controller\ProfileController;
 use PwPop\Controller\ProductController;
+use PwPop\Controller\IndexController;
+use PwPop\Controller\MyProductsController;
 
 
 $app->get('/login', function (Request $request, Response $response, array $args) {
@@ -18,12 +20,6 @@ $app->get('/login', function (Request $request, Response $response, array $args)
 $app->get('/registre', function (Request $request, Response $response, array $args) {
 
     return $this->view->render($response, 'registre.twig', [
-        'logged' => $_SESSION['logged'] ?? null,
-    ]);
-});
-
-$app->get('/', function (Request $request, Response $response, array $args) {
-    return $this->view->render($response, 'index.twig', [
         'logged' => $_SESSION['logged'] ?? null,
     ]);
 });
@@ -48,11 +44,13 @@ $app->get('/upload', function (Request $request, Response $response, array $args
     ]);
 });
 
-$app->get('/product', function (Request $request, Response $response, array $args) {
-    return $this->view->render($response, 'product.twig', [
+/*$app->get('/product', function (Request $request, Response $response, array $args) {
+    return $this->view->render($response, 'myproducts.twig', [
         'logged' => $_SESSION['logged'] ?? null
     ]);
-});
+});*/
+
+$app->get('/product', MyProductsController::class.':productsUpdate');
 
 $app->get('/logout', UserController::class.':logOut');
 
@@ -63,6 +61,10 @@ $app->post('/modify',ProfileController::class . ':modifyAction');
 $app->post('/user',UserController::class . ':loginAction');
 
 $app->post('/uploadProduct', ProductController::class . ':uploadAction');
+
+$app->get('/', IndexController::class.':productsUpdate');
+
+$app->get('/deleteAcc', UserController::class.':deleteAccount');
 
 $app->add(SessionMiddleware::class);
 

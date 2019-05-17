@@ -11,10 +11,11 @@ interface UserRepositoryInterface{
 
     public function takeUser(string $email): User;
 
-    public function update(User $user);
+    public function update(User $user,int $mode);
 
     public function takeProducts(): array;
 
     public function saveProduct(Product $product);
 
+    public function deleteProducts(string $username);
 }
