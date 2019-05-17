@@ -44,13 +44,13 @@ $app->get('/upload', function (Request $request, Response $response, array $args
     ]);
 });
 
-/*$app->get('/product', function (Request $request, Response $response, array $args) {
+$app->get('/product', MyProductsController::class.':productsUpdate');
+
+$app->get('/myproducts', function (Request $request, Response $response, array $args) {
     return $this->view->render($response, 'myproducts.twig', [
         'logged' => $_SESSION['logged'] ?? null
     ]);
-});*/
-
-$app->get('/product', MyProductsController::class.':productsUpdate');
+});
 
 $app->get('/logout', UserController::class.':logOut');
 
