@@ -56,12 +56,12 @@ final class MyProductsController
             $_SESSION['my_products'] = $newArray;
 
             return $this->container->get('view')->render($response, 'myproducts.twig', [
-                'products' => $_SESSION['my_products'],
-                'confirmed' => $_SESSION['confirmed'],
+                'products' => $_SESSION['my_products'] ?? null,
+                'confirmed' => $_SESSION['confirmed'] ?? null,
                 'success_message' => $_SESSION['success_message'] ?? null,
-                'logged' => $_SESSION['logged'] ?? null,
+                'logged' => $_SESSION['logged'] ?? false,
                 'email' => $_SESSION['email'] ?? null,
-                'profileImage' => $_SESSION['profileImage']
+                'profileImage' => $_SESSION['profileImage'] ?? null
             ]);
 
         } catch (\Exception $e) {

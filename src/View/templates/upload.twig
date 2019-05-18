@@ -35,10 +35,12 @@
                                 <label for="price">Price</label>
                                 <span class="helper-text" id="message-price"></span>
                             </div>
+
                             <div class="file-field input-field col s6">
                                 <div class="btn">
                                     <span>Image</span>
                                     <input type="file" name="files[]" id="file_chooser">
+                                    <span class="error" id="message-email">{{ errorImg }}</span>
                                 </div>
                                 <div class="file-path-wrapper">
                                     <input class="file-path validate" id="file" name="files[]" type="file" value="" placeholder="Choose an image" multiple="multiple">

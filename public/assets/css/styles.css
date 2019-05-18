@@ -464,5 +464,10 @@ footer > p{
 }
 
 .carousel{
-    top:11%;
+    top: 11%;
+    width: 80%;
+    left: 0;
+}
+.carousel .carousel-item{
+    width: 80% !important;
 }

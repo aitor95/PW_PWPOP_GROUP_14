@@ -79,6 +79,7 @@ final class PDORepository implements UserRepositoryInterface{
 
         if($registered==false && $deletedAcc == false){
             $_SESSION['error'] = 'User or Email Invalid!';
+            $hide_menu = 'hide';
         }
 
         return $registered;

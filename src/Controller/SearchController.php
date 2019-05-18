@@ -34,7 +34,6 @@ final class SearchController
             $_SESSION['image'] = null;
 
             $data = $request->getParsedBody();
-
             /** @var PDORepository $repository */
             $repository = $this->container->get('user_repo');
 
@@ -79,12 +78,12 @@ final class SearchController
             }
             $_SESSION['search'] = $newArray;
             return $this->container->get('view')->render($response, 'search.twig', [
-                'products' => $_SESSION['search'],
-                'confirmed' => $_SESSION['confirmed'],
-                'success_message' => $_SESSION['success_message'],
-                'logged' => $_SESSION['logged'] ?? null,
+                'products' => $_SESSION['search'] ?? null,
+                'confirmed' => $_SESSION['confirmed'] ?? null,
+                'success_message' => $_SESSION['success_message'] ?? null,
+                'logged' => $_SESSION['logged'] ?? false,
                 'email' => $_SESSION['email'] ?? null,
-                'profileImage' => $_SESSION['profileImage']
+                'profileImage' => $_SESSION['profileImage'] ?? null
             ]);
 
         } catch

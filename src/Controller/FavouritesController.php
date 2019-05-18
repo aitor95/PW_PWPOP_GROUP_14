@@ -72,10 +72,10 @@ class FavouritesController
             return $this->container->get('view')->render($response, 'index.twig', [
                 'success_message' => $_SESSION['success_message'] ?? null,
                 'email' => $_SESSION['email'] ?? null,
-                'products' => $_SESSION['products'],
-                'logged' => $_SESSION['logged'] ?? null,
-                'confirmed' => $_SESSION['confirmed'],
-                'profileImage' => $_SESSION['profileImage']
+                'products' => $_SESSION['products'] ?? null,
+                'logged' => $_SESSION['logged'] ?? false,
+                'confirmed' => $_SESSION['confirmed'] ?? null,
+                'profileImage' => $_SESSION['profileImage'] ?? null
             ]);
         }
     }
@@ -113,12 +113,12 @@ class FavouritesController
             $_SESSION['my_products'] = $newArray;
 
             return $this->container->get('view')->render($response, 'favourites.twig', [
-                'products' => $_SESSION['my_products'],
-                'confirmed' => $_SESSION['confirmed'],
+                'products' => $_SESSION['my_products'] ?? null,
+                'confirmed' => $_SESSION['confirmed'] ?? null,
                 'success_message' => $_SESSION['success_message'] ?? null,
-                'logged' => $_SESSION['logged'] ?? null,
+                'logged' => $_SESSION['logged'] ?? false,
                 'email' => $_SESSION['email'] ?? null,
-                'profileImage' => $_SESSION['profileImage']
+                'profileImage' => $_SESSION['profileImage'] ?? null
             ]);
 
         } catch (\Exception $e) {

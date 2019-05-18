@@ -39,6 +39,15 @@ $app->get('/403', function (Request $request, Response $response, array $args) {
     ]);
 });
 
+$app->get('/404', function (Request $request, Response $response, array $args) {
+    return $this->view->render($response, '404.twig', [
+        'confirmed' => $_SESSION['confirmed'] ?? null,
+        'logged' => $_SESSION['logged'] ?? false,
+        'hide_menu' => 'hide'
+    ]);
+});
+
+
 $app->get('/upload', function (Request $request, Response $response, array $args) {
     return $this->view->render($response, 'upload.twig', [
         'email' => $_SESSION['email'] ?? null,

@@ -64,12 +64,12 @@ final class ProductController
                 $_SESSION['success_message'] = 'Product Uploaded!';
 
                 return $this->container->get('view')->render($response, 'index.twig', [
-                    'products' => $_SESSION['products'],
-                    'confirmed' => $_SESSION['confirmed'],
-                    'success_message' => $_SESSION['success_message'],
+                    'products' => $_SESSION['products'] ?? null,
+                    'confirmed' => $_SESSION['confirmed'] ?? null,
+                    'success_message' => $_SESSION['success_message'] ?? null,
                     'email' => $_SESSION['email'] ?? null,
-                    'logged' => $_SESSION['logged'],
-                    'profileImage' => $_SESSION['profileImage']
+                    'logged' => $_SESSION['logged'] ?? false,
+                    'profileImage' => $_SESSION['profileImage'] ?? null
                 ]);
 
             } else {
@@ -78,10 +78,10 @@ final class ProductController
                 $errorImg = "Wrong Image Format, Accepted: jpg, png, jpeg";
 
                 return $this->container->get('view')->render($response, 'upload.twig', [
-                    'errorImg' => $errorImg,
-                    'confirmed' => $_SESSION['confirmed'],
-                    'profileImage' => $_SESSION['profileImage'],
-                    'logged' => $_SESSION['logged'],
+                    'errorImg' => $errorImg ?? null,
+                    'confirmed' => $_SESSION['confirmed'] ?? null,
+                    'profileImage' => $_SESSION['profileImage'] ?? null,
+                    'logged' => $_SESSION['logged'] ?? false,
                 ]);
 
             }
@@ -142,16 +142,16 @@ final class ProductController
             return $this->container->get('view')->render($response, 'product.twig', [
                 'success_message' => $_SESSION['success_message'] ?? null,
                 'email' => $_SESSION['email'] ?? null,
-                'logged' => $_SESSION['logged'] ?? null,
-                'title' => $my_product[2],
-                'description' => $my_product[3],
-                'price' => $my_product[4],
-                'productsImg' => $new,
-                'folder' => $my_product[5],
-                'category' => $my_product[6],
-                'owner' => $owner,
-                'confirmed' => $_SESSION['confirmed'],
-                'profileImage' => $_SESSION['profileImage']
+                'logged' => $_SESSION['logged'] ?? false,
+                'title' => $my_product[2] ?? null,
+                'description' => $my_product[3] ?? null,
+                'price' => $my_product[4] ?? null,
+                'productsImg' => $new ?? null,
+                'folder' => $my_product[5] ?? null,
+                'category' => $my_product[6] ?? null,
+                'owner' => $owner ?? null,
+                'confirmed' => $_SESSION['confirmed'] ?? null,
+                'profileImage' => $_SESSION['profileImage'] ?? null
             ]);
         }
 
@@ -192,12 +192,12 @@ final class ProductController
             $_SESSION['success_message'] = 'Product Updated!';
 
             return $this->container->get('view')->render($response, 'index.twig', [
-                'products' => $_SESSION['products'],
-                'confirmed' => $_SESSION['confirmed'],
-                'success_message' => $_SESSION['success_message'],
+                'products' => $_SESSION['products'] ?? null,
+                'confirmed' => $_SESSION['confirmed'] ?? null,
+                'success_message' => $_SESSION['success_message'] ?? null,
                 'email' => $_SESSION['email'] ?? null,
-                'logged' => $_SESSION['logged'],
-                'profileImage' => $_SESSION['profileImage']
+                'logged' => $_SESSION['logged'] ?? false,
+                'profileImage' => $_SESSION['profileImage'] ?? null
             ]);
 
 
@@ -245,12 +245,12 @@ final class ProductController
             $_SESSION['success_message'] = 'Product Buyed!';
 
             return $this->container->get('view')->render($response, 'index.twig', [
-                'products' => $_SESSION['products'],
-                'confirmed' => $_SESSION['confirmed'],
-                'success_message' => $_SESSION['success_message'],
+                'products' => $_SESSION['products'] ?? null,
+                'confirmed' => $_SESSION['confirmed'] ?? null,
+                'success_message' => $_SESSION['success_message'] ?? null,
                 'email' => $_SESSION['email'] ?? null,
-                'logged' => $_SESSION['logged'],
-                'profileImage' => $_SESSION['profileImage']
+                'logged' => $_SESSION['logged'] ?? false,
+                'profileImage' => $_SESSION['profileImage'] ?? null
             ]);
 
 
@@ -275,11 +275,11 @@ final class ProductController
             $_SESSION['success_message'] = 'Product Deleted!';
 
             return $this->container->get('view')->render($response, 'index.twig', [
-                'products' => $_SESSION['products'],
-                'confirmed' => $_SESSION['confirmed'],
-                'success_message' => $_SESSION['success_message'],
-                'logged' => $_SESSION['logged'],
-                'profileImage' => $_SESSION['profileImage']
+                'products' => $_SESSION['products'] ?? null,
+                'confirmed' => $_SESSION['confirmed'] ?? null,
+                'success_message' => $_SESSION['success_message'] ?? null,
+                'logged' => $_SESSION['logged'] ?? false,
+                'profileImage' => $_SESSION['profileImage'] ?? null
             ]);
 
 

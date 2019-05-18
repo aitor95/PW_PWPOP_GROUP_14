@@ -36,15 +36,15 @@ final class ProfileController{
             $user = $repository->takeUser($email);
 
             return $this->container->get('view')->render($response, 'profile.twig', [
-                'confirmed' => $_SESSION['confirmed'],
-                'logged' => $_SESSION['logged'],
-                'email' => $user->getEmail(),
-                'username' => $user->getUsername(),
-                'name' => $user->getName(),
-                'birthDate' => $user->getBirthDate(),
-                'phone' => $user->getPhone(),
-                'profileImage' => $_SESSION['profileImage'],
-                'error_message' => $_SESSION['success_message'],
+                'confirmed' => $_SESSION['confirmed'] ?? null,
+                'logged' => $_SESSION['logged'] ?? false,
+                'email' => $user->getEmail() ?? null,
+                'username' => $user->getUsername() ?? null,
+                'name' => $user->getName() ?? null,
+                'birthDate' => $user->getBirthDate() ?? null,
+                'phone' => $user->getPhone() ?? null,
+                'profileImage' => $_SESSION['profileImage'] ?? null,
+                'error_message' => $_SESSION['success_message'] ?? null,
             ]);
 
         } catch (\Exception $e) {
@@ -101,13 +101,13 @@ final class ProfileController{
 
 
                 return $this->container->get('view')->render($response, 'index.twig', [
-                    'products' => $_SESSION['products'],
-                    'success_message' => $_SESSION['success_message'],
-                    'confirmed' => $_SESSION['confirmed'],
-                    'logged' => $_SESSION['logged'],
-                    'profileImg' => $user->getProfileImg(),
+                    'products' => $_SESSION['products'] ?? null,
+                    'success_message' => $_SESSION['success_message'] ?? null,
+                    'confirmed' => $_SESSION['confirmed'] ?? null,
+                    'logged' => $_SESSION['logged'] ?? false,
+                    'profileImg' => $user->getProfileImg() ?? null,
                     'email' => $_SESSION['email'] ?? null,
-                    'profileImage' => $_SESSION['profileImage']
+                    'profileImage' => $_SESSION['profileImage'] ?? null
                 ]);
 
 

@@ -36,13 +36,14 @@ final class IndexController
             $products = $repository->takeProducts();
 
             if($_SESSION['logged'] == true){
-
+                $_GET['size'] = null;
                 //Agafem el usuari per gestionar que no mostri els seus productes
                 $user = $repository->takeUser($_SESSION['email']);
                 $i = 0;
                 $j = 0;
                 $newArray=[];
-                if($_GET['size']==null){
+
+                if($_GET['size'] == null){
                     $_GET['size']=5;
                 }
 
@@ -74,13 +75,13 @@ final class IndexController
             $_SESSION['products'] = $newArray;
 
             return $this->container->get('view')->render($response, 'index.twig', [
-                'products' => $_SESSION['products'],
-                'size' => $_GET['size'],
-                'confirmed' => $_SESSION['confirmed'],
+                'products' => $_SESSION['products'] ?? null,
+                'size' => $_GET['size'] ?? '',
+                'confirmed' => $_SESSION['confirmed'] ?? null,
                 'success_message' => $_SESSION['success_message'] ?? null,
-                'logged' => $_SESSION['logged'] ?? null,
+                'logged' => $_SESSION['logged'] ?? false,
                 'email' => $_SESSION['email'] ?? null,
-                'profileImage' => $_SESSION['profileImage']
+                'profileImage' => $_SESSION['profileImage'] ?? null
             ]);
 
         } catch

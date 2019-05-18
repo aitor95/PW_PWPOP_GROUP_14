@@ -15,6 +15,7 @@ final class UserController
 
     /** @var ContainerInterface */
     private $container;
+    private const COOKIES_ADVICE = 'cookies_advice';
 
     /**
      * HelloController constructor.
@@ -61,9 +62,9 @@ final class UserController
 
                 return $this->container->get('view')->render($response, 'login.twig', [
                     'hide_menu' => 'hide',
-                    'confirmed' => $_SESSION['confirmed'],
-                    'success' => 'Registration SUccess!',
-                    'logged' => $_SESSION['logged'],
+                    'confirmed' => $_SESSION['confirmed'] ?? null,
+                    'success' => 'Registration SUccess!' ?? null,
+                    'logged' => $_SESSION['logged'] ?? false,
                 ]);
 
             } else {
@@ -86,12 +87,12 @@ final class UserController
                 }
 
                 return $this->container->get('view')->render($response, 'registre.twig', [
-                    'errorEmail' => $errorEmail,
+                    'errorEmail' => $errorEmail ?? null,
                     'hide_menu' => 'hide',
-                    'confirmed' => $_SESSION['confirmed'],
-                    'errorUsername' => $errorUsername,
-                    'errorImg' => $errorImg,
-                    'logged' => $_SESSION['logged'],
+                    'confirmed' => $_SESSION['confirmed'] ?? null,
+                    'errorUsername' => $errorUsername ?? null,
+                    'errorImg' => $errorImg ?? null,
+                    'logged' => $_SESSION['logged'] ?? false,
                 ]);
 
             }
@@ -106,15 +107,18 @@ final class UserController
     public function loginAction(Request $request, Response $response): Response
     {
         try {
+            //$adviceCookie = FigRequestCookies::get($request, self::COOKIES_ADVICE);
+           // $isWarned = $adviceCookie->getValue();
 
             $data = $request->getParsedBody();
 
             /** @var PDORepository $repository */
             $repository = $this->container->get('user_repo');
 
-
             if ($repository->login($data['email'], $data['password'])) {
-
+                if ($data['remember'] == 'on'){
+                    setcookie("username", $data['email'], time()+1314000);
+                }
                 $_SESSION['success_message'] = 'Login Success!';
                 $_SESSION['logged'] = true;
 
@@ -131,22 +135,22 @@ final class UserController
                 $_SESSION['profileImage'] = $user->getProfileImg();
 
                 return $this->container->get('view')->render($response, 'index.twig', [
-                    'confirmed' => $_SESSION['confirmed'],
-                    'products' => $_SESSION['products'],
-                    'success_message' => 'Login Success!',
-                    'logged' => $_SESSION['logged'],
-                    'email' => $_SESSION['email'],
-                    'profileImage' => $_SESSION['profileImage']
+                    'confirmed' => $_SESSION['confirmed'] ?? null,
+                    'products' => $_SESSION['products'] ?? null,
+                    'success_message' => 'Login Success!' ?? null,
+                    'logged' => $_SESSION['logged'] ?? false,
+                    'email' => $_SESSION['email'] ?? null,
+                    'profileImage' => $_SESSION['profileImage'] ?? null
                 ]);
 
             } else {
 
                 //No acierta usuario o contraseña
                 return $this->container->get('view')->render($response, 'login.twig', [
-                    'confirmed' => $_SESSION['confirmed'],
-                    'error' => $_SESSION['error'],
-                    'logged' => $_SESSION['logged'],
-
+                    'confirmed' => $_SESSION['confirmed'] ?? null,
+                    'error' => $_SESSION['error'] ?? null,
+                    'logged' => $_SESSION['logged'] ?? false,
+                    'hide_menu' => 'hide',
                 ]);
 
             }
@@ -168,11 +172,11 @@ final class UserController
         $_SESSION['success_message'] = 'Logged Out, See you Soon!';
 
         return $this->container->get('view')->render($response, 'index.twig', [
-            'confirmed' => $_SESSION['confirmed'],
-            'products' => $_SESSION['products'],
-            'success_message' => $_SESSION['success_message'],
-            'logged' => $_SESSION['logged'],
-            'profileImage' => $_SESSION['profileImage']
+            'confirmed' => $_SESSION['confirmed'] ?? null,
+            'products' => $_SESSION['products'] ?? null,
+            'success_message' => $_SESSION['success_message'] ?? null,
+            'logged' => $_SESSION['logged'] ?? false,
+            'profileImage' => $_SESSION['profileImage'] ?? null,
         ]);
 
     }
@@ -240,11 +244,11 @@ final class UserController
             $_SESSION['success_message'] = 'Confirmation Email Sended!';
 
             return $this->container->get('view')->render($response, 'index.twig', [
-                'confirmed' => $_SESSION['confirmed'],
-                'products' => $_SESSION['products'],
-                'success_message' => $_SESSION['success_message'],
-                'logged' => $_SESSION['logged'],
-                'profileImage' => $_SESSION['profileImage']
+                'confirmed' => $_SESSION['confirmed'] ?? null,
+                'products' => $_SESSION['products'] ?? null,
+                'success_message' => $_SESSION['success_message'] ?? null,
+                'logged' => $_SESSION['logged'] ?? false,
+                'profileImage' => $_SESSION['profileImage'] ?? null,
             ]);
 
 
