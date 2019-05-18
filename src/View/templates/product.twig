@@ -11,9 +11,11 @@
         {% if owner == true %}
             <div class="container">
                 <div class="product-left">
-                    <div class="image-product">
-                        <a href="#"><img src="{{ base_url }}/assets/img/Uploads/{{ productImg }}" alt=""></a>
-                    </div>
+                    <div class="carousel">
+                    {% for product in productsImg %}
+                        <a class="carousel-item" href="#"><img src="{{ base_url }}/assets/img/Uploads/{{ folder }}/{{ product }}"></a>
+                    {% endfor %}
+                </div>
                 </div>
                 <div class="product-info">
                     <div class="right-grid">
@@ -110,8 +112,10 @@
 
             <div class="container">
             <div class="product-left">
-                <div class="image-product">
-                    <a href="#"><img src="{{ base_url }}/assets/img/Uploads/{{ productImg }}" alt=""></a>
+                <div class="carousel">
+                    {% for product in productsImg %}
+                        <a class="carousel-item" href="#"><img src="{{ base_url }}/assets/img/Uploads/{{ folder }}/{{ product }}"></a>
+                    {% endfor %}
                 </div>
             </div>
             <div class="product-info">

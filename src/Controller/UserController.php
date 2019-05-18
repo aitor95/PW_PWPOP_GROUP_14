@@ -60,6 +60,7 @@ final class UserController
                 (new MailerController())->confirmationMail($user);
 
                 return $this->container->get('view')->render($response, 'login.twig', [
+                    'hide_menu' => 'hide',
                     'confirmed' => $_SESSION['confirmed'],
                     'success' => 'Registration SUccess!',
                     'logged' => $_SESSION['logged'],
@@ -86,6 +87,7 @@ final class UserController
 
                 return $this->container->get('view')->render($response, 'registre.twig', [
                     'errorEmail' => $errorEmail,
+                    'hide_menu' => 'hide',
                     'confirmed' => $_SESSION['confirmed'],
                     'errorUsername' => $errorUsername,
                     'errorImg' => $errorImg,

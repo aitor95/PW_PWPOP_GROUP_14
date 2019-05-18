@@ -32,6 +32,9 @@ M.FloatingActionButton.init(Float, {});
 var Tooltip = document.querySelectorAll('.tooltipped');
 M.Tooltip.init(Tooltip, {});
 
+var Carousel = document.querySelector('.carousel');
+M.Carousel.init(Carousel,{});
+
 function validaFormulario(event){
 
     var devolver = true;

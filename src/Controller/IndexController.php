@@ -72,6 +72,7 @@ final class IndexController
             }
 
             $_SESSION['products'] = $newArray;
+
             return $this->container->get('view')->render($response, 'index.twig', [
                 'products' => $_SESSION['products'],
                 'size' => $_GET['size'],

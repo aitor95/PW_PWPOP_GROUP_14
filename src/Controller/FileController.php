@@ -58,12 +58,15 @@ final class FileController
 
     }
 
-    public function uploadProductAction(Request $request, Response $response, string $user):string
+    public function uploadProductAction(Request $request, Response $response, string $username, int $id):string
     {
         $uploadedFiles = $request->getUploadedFiles();
 
         $errors = [];
         $name = '';
+        //ens guardem la id de la primera imatge com a nom de la carpeta nova
+        $num = $id;
+        $folder='';
 
         /* @var UploadedFileInterface $uploadedFile */
         foreach ($uploadedFiles['files'] as $uploadedFile) {
@@ -80,15 +83,23 @@ final class FileController
             $format = $fileInfo['extension'];
 
             if (!$this->isValidFormat($format)) {
+                $folder='error';
                 $errors[] = sprintf(self::INVALID_EXTENSION_ERROR, $format);
                 continue;
             }
 
-            $name = "Product_". $user . "." . $format;
+            if($folder==''){
+                //Creamos la nueva carpeta para el producto
+                $folder = "Product_".$username.$num. "." . $format;
+                mkdir(self::UPLOADS_DIR. DIRECTORY_SEPARATOR. $folder, 0777, true);
+            }
+
+            $name = "Product_". $username.$id . "." . $format;
             // We generate a custom name here instead of using the one coming form the form
-            $uploadedFile->moveTo(self::UPLOADS_DIR . DIRECTORY_SEPARATOR . $name);
+            $uploadedFile->moveTo(self::UPLOADS_DIR. DIRECTORY_SEPARATOR. $folder . DIRECTORY_SEPARATOR . $name);
+            $id++;
         }
 
-        return $name;
+        return $folder;
     }
  }

@@ -41,8 +41,8 @@
                                     <input type="file" name="files[]" id="file_chooser">
                                 </div>
                                 <div class="file-path-wrapper">
-                                    <input class="file-path validate" id="file" name="files[]" type="text" placeholder="Choose an image">
-                                    <span class="helper-text" id="message-chooser"></span>
+                                    <input class="file-path validate" id="file" name="files[]" type="file" value="" placeholder="Choose an image" multiple="multiple">
+                                    <span class="helper-text" id="message-chooser">{{ errorImg }}</span>
                                 </div>
                             </div>
                         </div>

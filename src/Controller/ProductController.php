@@ -40,7 +40,7 @@ final class ProductController
             $products=$repository->takeProducts();
             $id = sizeof($products) + 1;
 
-            $name = (new FileController)->uploadProductAction($request,$response,$user->getUsername().$id);
+            $name = (new FileController)->uploadProductAction($request,$response,$user->getUsername(),$id);
             //Cas en el que estem actualitzant el producte i no creantlo
             if($name==null){
                 $name=$_SESSION['productInfo'];
@@ -57,7 +57,7 @@ final class ProductController
             );
 
 
-            if (!($name == '')) {
+            if (!($name == 'error')) {
 
                 //Si es correcta guardamos al usario en la database
                 $repository->saveProduct($product);
@@ -80,6 +80,7 @@ final class ProductController
                 return $this->container->get('view')->render($response, 'upload.twig', [
                     'errorImg' => $errorImg,
                     'confirmed' => $_SESSION['confirmed'],
+                    'profileImage' => $_SESSION['profileImage'],
                     'logged' => $_SESSION['logged'],
                 ]);
 
@@ -133,6 +134,10 @@ final class ProductController
                 $owner = true;
             }
 
+            $images = scandir("../public/assets/img/Uploads/".$my_product[5]);
+            $new = array_slice($images, 2, sizeof($images), true);
+
+
 
             return $this->container->get('view')->render($response, 'product.twig', [
                 'success_message' => $_SESSION['success_message'] ?? null,
@@ -141,7 +146,8 @@ final class ProductController
                 'title' => $my_product[2],
                 'description' => $my_product[3],
                 'price' => $my_product[4],
-                'productImg' => $my_product[5],
+                'productsImg' => $new,
+                'folder' => $my_product[5],
                 'category' => $my_product[6],
                 'owner' => $owner,
                 'confirmed' => $_SESSION['confirmed'],
