@@ -35,14 +35,16 @@ return [
 
 
 ```
+Por último, destacar que hemos preparado un archivo sql que contiene el código necesario para poder crear nuestra Base de Datos y que sea posible la ejecución del proyecto, así como un archivo *UML* creado con [Star UML](http://staruml.io/download).
  
+## Consideraciones
+Hemos utilizado el método de encriptación *md5* para la contraseña.
 ## Organización
 
  Las tareas las hemos ido repartiendo de modo que cada miembro del grupo hiciese aquello que más le gustaba y que tuviera más facilidad a la hora de realizar las tareas.
 
 ### Horas Necesarias 
-Hemos calculado que hemos necesitado aproximadamente unas 50 horas para poder realizar toda la práctica incluyendo las tareas opcionales.
+Hemos calculado que hemos necesitado aproximadamente 60 horas para poder realizar toda la práctica incluyendo las tareas opcionales.
 
 ### Problemas Encontrados
 Uno de los miembros del grupo ha tenido problemas a la hora de poder hacer todos los *commits*, *push*/*pull* en `Github` por lo que no todos los *commits* se ven reflejados
-
