@@ -55,4 +55,4 @@ Uno de los miembros del grupo ha tenido problemas a la hora de poder hacer todos
 ## Warning
 En caso de que el proyecto de problemas a la hora de ejecutarlo, [descargar el proyecto](https://wetransfer.com/downloads/ce30609e4040fb1decb9510c2c6dca3e20190518204103/4dae8797b9c6ee768098083ce9975f7c20190518204103/bbe062)
 
-*El enlace de `UML y SQL` caduca en 7 días!!!
+* El enlace de `UML y SQL` caduca en 7 días!!!
