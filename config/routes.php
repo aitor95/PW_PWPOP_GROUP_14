@@ -14,9 +14,9 @@ use PwPop\Controller\FavouritesController;
 
 $app->get('/login', function (Request $request, Response $response, array $args) {
     return $this->view->render($response, 'login.twig', [
-        'confirmed' => $_SESSION['confirmed'],
+        'confirmed' => $_SESSION['confirmed'] ?? null,
         'success_message' => $_SESSION['success_message'] ?? null,
-        'logged' => $_SESSION['logged'] ?? null,
+        'logged' => $_SESSION['logged'] ?? false,
         'hide_menu' => 'hide'
     ]);
 });
@@ -24,8 +24,8 @@ $app->get('/login', function (Request $request, Response $response, array $args)
 $app->get('/registre', function (Request $request, Response $response, array $args) {
 
     return $this->view->render($response, 'registre.twig', [
-        'confirmed' => $_SESSION['confirmed'],
-        'logged' => $_SESSION['logged'] ?? null,
+        'confirmed' => $_SESSION['confirmed'] ?? null,
+        'logged' => $_SESSION['logged'] ?? false,
         'hide_menu' => 'hide'
     ]);
 });
@@ -33,17 +33,18 @@ $app->get('/registre', function (Request $request, Response $response, array $ar
 
 $app->get('/403', function (Request $request, Response $response, array $args) {
     return $this->view->render($response, '403.twig', [
-        'confirmed' => $_SESSION['confirmed'],
-        'logged' => $_SESSION['logged'] ?? null,
+        'confirmed' => $_SESSION['confirmed'] ?? null,
+        'logged' => $_SESSION['logged'] ?? false,
+        'hide_menu' => 'hide'
     ]);
 });
 
 $app->get('/upload', function (Request $request, Response $response, array $args) {
     return $this->view->render($response, 'upload.twig', [
         'email' => $_SESSION['email'] ?? null,
-        'logged' => $_SESSION['logged'] ?? null,
+        'logged' => $_SESSION['logged'] ?? false,
         'confirmed' => $_SESSION['confirmed'] ?? null,
-        'profileImage' => $_SESSION['profileImage']
+        'profileImage' => $_SESSION['profileImage'] ?? null,
     ]);
 });
 

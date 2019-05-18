@@ -8,10 +8,11 @@ $(document).ready(function(){
     var size = parseInt(size);
     var size = size + 5;
 
-    $.ajax({url: "/?size="+size, success: function(result){
-
-        window.location.href = "/?size="+size;
-
+    $.ajax({
+      type: 'GET',
+      url: "/?size="+size,
+      success: function(result){
+        $("body").html(result);
     }});
   });
 });
