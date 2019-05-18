@@ -287,4 +287,34 @@ final class PDORepository implements UserRepositoryInterface{
 
     }
 
+    public function addFav(string $productImg, string $email){
+
+        $statement = $this->database->connection->prepare(
+            "INSERT INTO user_favourites(email, productImage) 
+                        values(:email, :productImage)");
+
+        $statement->bindParam('email', $email, PDO::PARAM_STR);
+        $statement->bindParam('productImage', $productImg, PDO::PARAM_STR);
+
+        $statement->execute();
+
+    }
+
+    public function isFav(string $productImage, string $email):bool{
+
+        $query = "SELECT * FROM user_favourites WHERE email=\"" . $email . "\" AND productImage=\"" . $productImage . "\"";
+        $stmt = $this->database->connection->prepare($query);
+        $stmt->execute();
+        $data = $stmt->fetch();
+
+        if($data!=null){
+            return true;
+        }else{
+            return false;
+        }
+
+    }
+
+
+
 }

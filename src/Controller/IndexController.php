@@ -57,7 +57,11 @@ final class IndexController
 
             }else{
 
-                $newArray = array_slice($products, 0, 5, true);
+                if($_GET['size']==null){
+                    $_GET['size']=5;
+                }
+
+                $newArray = array_slice($products, 0, $_GET['size'], true);
 
             }
 

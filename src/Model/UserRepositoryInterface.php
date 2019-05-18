@@ -28,4 +28,8 @@ interface UserRepositoryInterface{
     public function soldOutProduct(string $img);
 
     public function confirmAccount(string $username);
+
+    public function addFav(string $productImg, string $email);
+
+    public function isFav(string $productImage, string $email):bool;
 }

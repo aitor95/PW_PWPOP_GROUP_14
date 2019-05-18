@@ -101,10 +101,13 @@ final class ProfileController{
 
 
                 return $this->container->get('view')->render($response, 'index.twig', [
+                    'products' => $_SESSION['products'],
                     'success_message' => $_SESSION['success_message'],
                     'confirmed' => $_SESSION['confirmed'],
                     'logged' => $_SESSION['logged'],
                     'profileImg' => $user->getProfileImg(),
+                    'email' => $_SESSION['email'] ?? null,
+                    'profileImage' => $_SESSION['profileImage']
                 ]);
 
 

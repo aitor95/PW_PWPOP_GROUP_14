@@ -230,6 +230,8 @@ final class ProductController
             $buyer=$repository->takeUser($_SESSION['email']);
             $seller = $repository->takeEmail($my_product[1]);
 
+            $repository->soldOutProduct($my_product[5]);
+
 
             //Enviar correo con info (Coger email del vendedor, y enviar usuario y mobil del comprador)
             (new MailerController())->buyMail($buyer,$seller);
