@@ -64,8 +64,11 @@ final class PDORepository implements UserRepositoryInterface{
         $passwordcrypted = md5($password);
 
         for ($i=0; $i < sizeof($data) ; $i++) {
-            if($email == $data[$i]['email'] && $passwordcrypted == $data[$i]['password']){
+            if(($email == $data[$i]['email'] || $email == $data[$i]['username']) && $passwordcrypted == $data[$i]['password']){
                 $registered = true;
+                if($email == $data[$i]['email']){
+                    $_SESSION['loginMethod']='email';
+                }
                 if($data[$i]['is_active'] == 0){
                     $deletedAcc = true;
                     $registered = false;

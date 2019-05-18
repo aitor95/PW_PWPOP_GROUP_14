@@ -15,7 +15,7 @@
                         <ul id="nav-mobile" class="right hide-on-med-and-down">
                             <li><a href="#modal1" data-target="modal1" class="modal-trigger"><i class="tiny material-icons">search</i></a></li>
                             {% if  logged  == true %}
-                                <li><a href="{{ base_url }}/profile"><i class="tiny material-icons">person</i></a></li>
+                                <li><a href="{{ base_url }}/profile"> <img src="{{ base_url}}/assets/img/Uploads/{{ profileImage }}" alt="" class="circle responsive-img"> <!-- notice the "circle" class --></a></li>
                                 <li><a href="{{ base_url }}/logout" methods="post" ><i class="tiny material-icons">power_settings_new</i></a></li>
                             {% else %}
                                 <li><a href="{{ base_url }}/403"><i class="tiny material-icons">person</i></a></li>
@@ -32,7 +32,7 @@
         <div class="wrapper-profile">
             <div class="left-grid">
                 <div class="image_user">
-                    <img src="{{ base_url}}/assets/img/Uploads/{{ profileImg }}" alt="">
+                    <img src="{{ base_url}}/assets/img/Uploads/{{ profileImage }}" alt="">
                 </div>
                 <div class="profile_info">
                         <p class="name">{{ name }}</p>
@@ -72,7 +72,7 @@
                                         <input type="file" name="files[]">
                                     </div>
                                     <div class="file-path-wrapper">
-                                        <input value="{{ profileImg }}" class="file-path validate" id="file" name="files[]" type="text" placeholder="Choose an image">
+                                        <input value="{{ profileImage }}" class="file-path validate" id="file" name="files[]" type="text" placeholder="Choose an image">
                                     </div>
                                 </div>
                             </div>

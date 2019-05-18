@@ -42,8 +42,11 @@ final class IndexController
                 $i = 0;
                 $j = 0;
                 $newArray=[];
+                if($_GET['size']==null){
+                    $_GET['size']=5;
+                }
 
-                while(($i<5) && (sizeof($products) > $j)){
+                while(($i<$_GET['size']) && (sizeof($products) > $j)){
                     //Controlar que el is_active sea igual a 1 y que el soldout sea igual a 0
                     if($products[$j][1] != $user->getUsername() && $products[$j][7] == 1 && $products[$j][8] == 0){
                         array_push($newArray, $products[$j]);
@@ -67,10 +70,12 @@ final class IndexController
             $_SESSION['products'] = $newArray;
             return $this->container->get('view')->render($response, 'index.twig', [
                 'products' => $_SESSION['products'],
+                'size' => $_GET['size'],
                 'confirmed' => $_SESSION['confirmed'],
                 'success_message' => $_SESSION['success_message'] ?? null,
                 'logged' => $_SESSION['logged'] ?? null,
-                'email' => $_SESSION['email'] ?? null
+                'email' => $_SESSION['email'] ?? null,
+                'profileImage' => $_SESSION['profileImage']
             ]);
 
         } catch
@@ -78,7 +83,5 @@ final class IndexController
             $response->getBody()->write('Unexpected error: ' . $e->getMessage());
             return $response->withStatus(500);
         }
-
-        return $response->withStatus(201);
     }
 }

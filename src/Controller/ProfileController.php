@@ -43,7 +43,8 @@ final class ProfileController{
                 'name' => $user->getName(),
                 'birthDate' => $user->getBirthDate(),
                 'phone' => $user->getPhone(),
-                'profileImg' => $user->getProfileImg(),
+                'profileImage' => $_SESSION['profileImage'],
+                'error_message' => $_SESSION['success_message'],
             ]);
 
         } catch (\Exception $e) {
@@ -62,13 +63,16 @@ final class ProfileController{
             /** @var PDORepository $repository */
             $repository = $this->container->get('user_repo');
 
+            //Agafem el usuari de la sessio en actiu
             $useraux = $repository->takeUser($_SESSION['email']);
-            $data['username'] = $useraux->getUsername();
+
+            //Agafem la persona del email que he cambiat o no
             $useraux2 = $repository->takeUser($data['email']);
 
-            //Controlamos si la imagen es correcta y que el usuario no este registrado (email o username)
-            $registered = $repository->isRegistered($data['email'], $data['username']);
-            $name = (new FileController)->uploadAction($request,$response,$data['username']);
+            //Volem saber si esta registrat, per poder utilitzar el correu o no
+            $registered = $repository->isRegistered($data['email'], $useraux->getUsername());
+            //Guardem també la nova imatge
+            $name = (new FileController)->uploadAction($request,$response,$useraux->getUsername());
 
             if($name==''){
                 $name = $useraux->getProfileImg();
@@ -79,12 +83,13 @@ final class ProfileController{
                 $data['password'],
                 $data['birthDate'],
                 $data['name'],
-                $data['username'],
+                $useraux->getUsername(),
                 $data['phone'],
                 new DateTime(),
                 new DateTime(),
                 $name,
-                1
+                1,
+                $useraux->getConfirmed()
             );
 
             //Controlem si el email esta ja agafat o no (potser que sigui jo el que tinc el email, llavors deixem actualitzar)
@@ -94,10 +99,12 @@ final class ProfileController{
                 $_SESSION['email'] = $data['email'];
                 $_SESSION['success_message'] = 'Data Actualized!';
 
+
                 return $this->container->get('view')->render($response, 'index.twig', [
                     'success_message' => $_SESSION['success_message'],
                     'confirmed' => $_SESSION['confirmed'],
                     'logged' => $_SESSION['logged'],
+                    'profileImg' => $user->getProfileImg(),
                 ]);
 
 
@@ -105,11 +112,7 @@ final class ProfileController{
                 //Cas en el que email estigui agafat
                 $_SESSION['success_message'] = 'Email in Use!';
 
-                return $this->container->get('view')->render($response, 'index.twig', [
-                    'confirmed' => $_SESSION['confirmed'],
-                    'success_message' => $_SESSION['success_message'],
-                    'logged' => $_SESSION['logged'],
-                ]);
+                return $this->profileUpdate($request,$response);
             }
 
 

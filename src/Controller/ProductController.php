@@ -69,6 +69,7 @@ final class ProductController
                     'success_message' => $_SESSION['success_message'],
                     'email' => $_SESSION['email'] ?? null,
                     'logged' => $_SESSION['logged'],
+                    'profileImage' => $_SESSION['profileImage']
                 ]);
 
             } else {
@@ -88,8 +89,6 @@ final class ProductController
             $response->getBody()->write('Unexpected error: ' . $e->getMessage());
             return $response->withStatus(500);
         }
-
-        return $response->withStatus(201);
 
     }
 
@@ -146,6 +145,7 @@ final class ProductController
                 'category' => $my_product[6],
                 'owner' => $owner,
                 'confirmed' => $_SESSION['confirmed'],
+                'profileImage' => $_SESSION['profileImage']
             ]);
         }
 
@@ -191,6 +191,7 @@ final class ProductController
                 'success_message' => $_SESSION['success_message'],
                 'email' => $_SESSION['email'] ?? null,
                 'logged' => $_SESSION['logged'],
+                'profileImage' => $_SESSION['profileImage']
             ]);
 
 
@@ -210,12 +211,19 @@ final class ProductController
             $repository = $this->container->get('user_repo');
 
             //repository soldout product
-            $repository->soldOutProduct($_REQUEST['image']);
+
+            if($_REQUEST['image'] != null){
+                //Si cliquem a buy desde el home
+                $image = $_REQUEST['image'];
+            }else{
+                //Si venim desde el overview del producte
+                $image = $_SESSION['productInfo'];
+            }
 
             $products=$repository->takeProducts();
 
             foreach($products as $product){
-                if($product[5] == $_REQUEST['image']){
+                if($product[5] == $image){
                     $my_product = $product;
                 }
             }
@@ -234,6 +242,7 @@ final class ProductController
                 'success_message' => $_SESSION['success_message'],
                 'email' => $_SESSION['email'] ?? null,
                 'logged' => $_SESSION['logged'],
+                'profileImage' => $_SESSION['profileImage']
             ]);
 
 
@@ -262,6 +271,7 @@ final class ProductController
                 'confirmed' => $_SESSION['confirmed'],
                 'success_message' => $_SESSION['success_message'],
                 'logged' => $_SESSION['logged'],
+                'profileImage' => $_SESSION['profileImage']
             ]);
 
 

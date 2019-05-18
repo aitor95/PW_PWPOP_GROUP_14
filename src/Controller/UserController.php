@@ -114,17 +114,27 @@ final class UserController
             if ($repository->login($data['email'], $data['password'])) {
 
                 $_SESSION['success_message'] = 'Login Success!';
-                $_SESSION['email'] = $data['email'];
                 $_SESSION['logged'] = true;
-                $user=$repository->takeUser($data['email']);
+
+                //Mirem si ens han introduit el login o el email
+                if($_SESSION['loginMethod'] == 'email'){
+                    $user=$repository->takeUser($data['email']);
+                    $_SESSION['email'] = $data['email'];
+                }else{
+                    $user=$repository->takeEmail($data['email']);
+                    $_SESSION['email'] = $user->getEmail();
+                }
+
                 $_SESSION['confirmed'] = $user->getConfirmed();
+                $_SESSION['profileImage'] = $user->getProfileImg();
 
                 return $this->container->get('view')->render($response, 'index.twig', [
                     'confirmed' => $_SESSION['confirmed'],
                     'products' => $_SESSION['products'],
                     'success_message' => 'Login Success!',
                     'logged' => $_SESSION['logged'],
-                    'email' => $_SESSION['email']
+                    'email' => $_SESSION['email'],
+                    'profileImage' => $_SESSION['profileImage']
                 ]);
 
             } else {
@@ -160,6 +170,7 @@ final class UserController
             'products' => $_SESSION['products'],
             'success_message' => $_SESSION['success_message'],
             'logged' => $_SESSION['logged'],
+            'profileImage' => $_SESSION['profileImage']
         ]);
 
     }
@@ -231,6 +242,7 @@ final class UserController
                 'products' => $_SESSION['products'],
                 'success_message' => $_SESSION['success_message'],
                 'logged' => $_SESSION['logged'],
+                'profileImage' => $_SESSION['profileImage']
             ]);
 
 

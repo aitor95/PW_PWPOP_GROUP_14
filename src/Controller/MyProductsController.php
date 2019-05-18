@@ -60,7 +60,8 @@ final class MyProductsController
                 'confirmed' => $_SESSION['confirmed'],
                 'success_message' => $_SESSION['success_message'] ?? null,
                 'logged' => $_SESSION['logged'] ?? null,
-                'email' => $_SESSION['email'] ?? null
+                'email' => $_SESSION['email'] ?? null,
+                'profileImage' => $_SESSION['profileImage']
             ]);
 
         } catch (\Exception $e) {

@@ -39,7 +39,8 @@ $app->get('/upload', function (Request $request, Response $response, array $args
     return $this->view->render($response, 'upload.twig', [
         'email' => $_SESSION['email'] ?? null,
         'logged' => $_SESSION['logged'] ?? null,
-        'confirmed' => $_SESSION['confirmed'] ?? null
+        'confirmed' => $_SESSION['confirmed'] ?? null,
+        'profileImage' => $_SESSION['profileImage']
     ]);
 });
 

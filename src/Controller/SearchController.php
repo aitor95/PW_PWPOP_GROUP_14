@@ -84,6 +84,7 @@ final class SearchController
                 'success_message' => $_SESSION['success_message'],
                 'logged' => $_SESSION['logged'] ?? null,
                 'email' => $_SESSION['email'] ?? null,
+                'profileImage' => $_SESSION['profileImage']
             ]);
 
         } catch
